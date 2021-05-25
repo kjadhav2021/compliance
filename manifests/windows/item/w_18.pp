@@ -5,7 +5,7 @@
 # @example
 #   include compliance::windows::item::w_18
 class compliance::windows::item::w_18 {
-  registry_value { 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netbt\Parameters\NoNameReleaseOnDemand':
+  registry_value { 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\NetBT\Parameters\NoNameReleaseOnDemand':
     ensure => present,
     type   => dword,
     data   => 0x00000001,
