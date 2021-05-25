@@ -5,10 +5,9 @@
 # @example
 #   include compliance::windows::item::w_2
 class compliance::windows::item::w_2 (
-  String  $system_timezone   = 'Malay Peninsula Standard Time',
+  String  $system_timezone   = 'Singapore Standard Time',
 ){
-  local_security_policy { 'Change the time zone':
-    ensure       => present,
-    policy_value => $system_timezone,
+  class { 'timezone_win':
+  timezone => $system_timezone,
   }
 }
