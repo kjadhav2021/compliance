@@ -5,7 +5,7 @@
 # @example
 #   include compliance::windows::item::w_17
 class compliance::windows::item::w_17 {
-  registry_value { 'HKEY_LOCAL_MACHINE\ SYSTEM\CurrentControlSet\Services\CDROM\AutoRun':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDROM\AutoRun':
     ensure => present,
     type   => dword,
     data   => 0xFF,
