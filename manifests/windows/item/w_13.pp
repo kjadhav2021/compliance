@@ -6,68 +6,68 @@
 #   include compliance::windows::item::w_13
 class compliance::windows::item::w_13 {
 
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL2.0\
   Client\DisabledByDefault':
     ensure => present,
     type   => dword,
     data   => 0x00000001,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 2.0\Server\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL2.0\Server\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client\
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL3.0\Client\
   DisabledByDefault':
     ensure => present,
     type   => dword,
     data   => 0x00000001,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL3.0\Server\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS1.0\Server
   \DisabledByDefault':
     ensure => present,
     type   => dword,
     data   => 0x00000001,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.0\Server\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS1.0\Server\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS1.1\Server
   \DisabledByDefault':
     ensure => present,
     type   => dword,
     data   => 0x00000001,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1\Server\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS1.1\Server\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS1.2\Server
   \DisabledByDefault':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS1.2\Server\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000001,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS1.2\Client
   \DisabledByDefault':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS1.2\Client\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000001,
@@ -77,32 +77,32 @@ class compliance::windows::item::w_13 {
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHA NNEL\Ciphers\RC4128\128\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC4128\128\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHA NNEL\Ciphers\RC440\128\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC440\128\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHA NNEL\Ciphers\RC456\128\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Ciphers\RC456\128\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHA NNEL\KeyExchangeAlgorithms\PKCS\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\KeyExchangeAlgorithms\PKCS\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Param eters\EnableSecuritySignature\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\EnableSecuritySignature\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Param eters\RequireSecuritySignature\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters\RequireSecuritySignature\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
