@@ -6,7 +6,7 @@
 #   include compliance::windows::item::w_7
 class compliance::windows::item::w_7 {
   user { 'guest':
-    ensure   => 'present',
+    ensure   => 'disabled',
     comment  => 'Built-in account for guest access to the computer/domain',
     groups   => ['BUILTIN\Guests'],
     provider => 'windows_adsi',
