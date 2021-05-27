@@ -13,6 +13,7 @@ class compliance {
   # include compliance::windows::item::w_19
   include compliance::windows::item::w_5
   include compliance::windows::item::w_6
+  include compliance::windows::item::w_7
   # TEJAq0jPaNXOUlDSyBdp
   # NifVRuXZnt9WMqIbx3Dt
 }
