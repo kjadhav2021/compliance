@@ -17,13 +17,13 @@ class compliance::windows::item::w_13 {
   #   type   => dword,
   #   data   => 0x00000000,
   # }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL3.0\Client\
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Client\
   DisabledByDefault':
     ensure => present,
     type   => dword,
     data   => 0x00000001,
   }
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL3.0\Server\Enabled':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\SSL 3.0\Server\Enabled':
     ensure => present,
     type   => dword,
     data   => 0x00000000,
