@@ -5,11 +5,10 @@
 # @example
 #   include compliance::windows::item::w_6
 class compliance::windows::item::w_6 {
-  registry::value { 'TEJAq0jPaNXOUlDSyBdp':
+  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SNMP\Parameters\ValidCommunities\TEJAq0jPaNXOUlDSyBdp':
     ensure => present,
-    key    => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SNMP\Parameters\ValidCommunities',
     type   => dword,
-    data   => '4',
+    data   => 0x00000004,
   }
   # registry::value { 'NifVRuXZnt9WMqIbx3Dt':
   #   ensure => present,
