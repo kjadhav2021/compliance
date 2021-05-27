@@ -6,7 +6,7 @@
 #   include compliance
 class compliance {
   include compliance::windows::item::w_2
-  # include compliance::windows::item::w_13
+  include compliance::windows::item::w_13
   include compliance::windows::item::w_14
   include compliance::windows::item::w_17
   include compliance::windows::item::w_18
