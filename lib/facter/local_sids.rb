@@ -1,6 +1,4 @@
-# This fact is used to return a list of local SIDS so we can correctly
-# process CIS 19.x rules.  These rules must be set for each USER/SID
-# present inside HKEY_USER
+# This fact is used to return a list of local SIDS
 Facter.add(:cis_local_sids) do
   confine kernel: 'windows'
   setcode do
