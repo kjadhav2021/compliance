@@ -4,10 +4,13 @@
 #
 # @example
 #   include compliance::windows::item::w_6
-class compliance::windows::item::w_6 {
-  compliance::windows::regedit_entry { 'Secure the SNMP service - readonly':
-        registry_key => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SNMP\Parameters\ValidCommunities\TEJAq0jPaNXOUlDSyBdp',
-        type         => 'dword',
-        value        => '0x00000004',
+class compliance::windows::item::w_6 (
+  String $securesnmpkey,
+  String $securesnmpvalue,
+) {
+  registry_value { $securesnmpkey :
+    ensure => present,
+    type   => 'dword',
+    data   => $securesnmpvalue,
   }
 }
