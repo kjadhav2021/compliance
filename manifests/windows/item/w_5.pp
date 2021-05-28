@@ -11,11 +11,9 @@ class compliance::windows::item::w_5 {
 
   if $facts['cis_local_sids'] {
     $facts['cis_local_sids'].each |$sid| {
-      registry_value { "HKEY_USERS\\${sid}${registry_keys}":
-        ensure => present,
-        type   => 'string',
-        data   => $registry_values,
-      }
+      notify{ $sid:}
+      notify{ $registry_keys:}
+      notify{ $registry_values:}
     }
   }
 }
