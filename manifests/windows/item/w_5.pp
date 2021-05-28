@@ -11,17 +11,17 @@ class compliance::windows::item::w_5 {
 
   if $facts['cis_local_sids'] {
     $facts['cis_local_sids'].each |$sid| {
-      registry::value { $::screensaverissecuretitle :
-        key   => $::screensaverissecurekey,
-        value => $::screensaverissecurevalue,
+      registry::value { "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop:ScreenSaverIsSecure": # lint:ignore:140chars
+        key   => "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop",
+        value => 'ScreenSaverIsSecure',
         type  => string,
-        data  => $::screensaverissecuredata,
+        data  => '1',
       }
-      registry::value { $::screensavertimeouttitle :
-        key   => $::screensavertimeoutkey,
-        value => $::screensavertimeoutvalue,
+      registry::value { "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop:ScreenSaveTimeOut": # lint:ignore:140chars
+        key   => "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop",
+        value => 'ScreenSaveTimeOut',
         type  => string,
-        data  => $::screensavertimeoutdata,
+        data  => '900',
       }
     }
   }
