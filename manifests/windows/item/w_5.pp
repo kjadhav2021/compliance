@@ -11,13 +11,13 @@ class compliance::windows::item::w_5 {
         key   => "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop",
         value => 'ScreenSaverIsSecure',
         type  => string,
-        data  => $::screensaverissecuredata,
+        data  => '1',
       }
       registry::value { "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop:ScreenSaveTimeOut": # lint:ignore:140chars
         key   => "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop",
         value => 'ScreenSaveTimeOut',
         type  => string,
-        data  => $::screensavertimeoutdata,
+        data  => '900',
       }
     }
   }
