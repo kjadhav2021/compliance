@@ -1,13 +1,13 @@
-# @summary A short summary of the purpose of this class
+# @summary
 #
-# A description of what this class does
+# enforce the timezone on target node machine
 #
 # @example
 #   include compliance::windows::item::w_2
 class compliance::windows::item::w_2 (
-  String  $system_timezone   = 'Singapore Standard Time',
+  String  $system_timezone,
 ){
   class { 'timezone_win':
-  timezone => $system_timezone,
+    timezone => $system_timezone,
   }
 }

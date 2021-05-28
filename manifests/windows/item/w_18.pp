@@ -1,13 +1,13 @@
-# @summary A short summary of the purpose of this class
+# @summary
+# 18.Configure the system not to respond to name release command
 #
-# A description of what this class does
 #
 # @example
 #   include compliance::windows::item::w_18
 class compliance::windows::item::w_18 {
-  registry_value { 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\NetBT\Parameters\NoNameReleaseOnDemand':
-    ensure => present,
-    type   => dword,
-    data   => 0x00000001,
+  compliance::windows::regedit_entry { 'configure the system not to respond to name release command':
+    registry_key => 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\NetBT\Parameters\NoNameReleaseOnDemand',
+    type         => 'dword',
+    value        => '0x00000001',
   }
 }

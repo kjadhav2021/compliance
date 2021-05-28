@@ -1,13 +1,12 @@
-# @summary A short summary of the purpose of this class
-#
-# A description of what this class does
+# @summary
+# 14.Allocate adequate space for the for Event viewer logs
 #
 # @example
 #   include compliance::windows::item::w_14
 class compliance::windows::item::w_14 {
-  registry_value { 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security\WarningLevel':
-    ensure => present,
-    type   => dword,
-    data   => 90,
+  compliance::windows::regedit_entry { 'allocate adequate space for the for Event viewer logs':
+    registry_key => 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security\WarningLevel',
+    type         => 'dword',
+    value        => '90',
   }
 }
