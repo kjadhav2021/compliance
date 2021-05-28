@@ -2,18 +2,18 @@
 # Values for Compliance module
 #
 # 2. Configure the time zone
-compliance::windows::item::w_2:system_timezone: 'Singapore Standard Time'
+compliance::windows::item::w_2:system_timezone: Singapore Standard Time
 
 # 5. Enable the screen saver password [Optional]
 # compliance::windows::item::w_5:screensaverissecuretitle: "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop:ScreenSaverIsSecure"
 # compliance::windows::item::w_5:screensaverissecurekey: "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop"
 # compliance::windows::item::w_5:screensaverissecurevalue: 'ScreenSaverIsSecure'
-compliance::windows::item::w_5:screensaverissecuredata: '1'
+compliance::windows::item::w_5:screensaverissecuredata: 1
 
 # compliance::windows::item::w_5:screensavertimeouttitle: "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop:ScreenSaveTimeOut"
 # compliance::windows::item::w_5:screensavertimeoutkey: "HKEY_USERS\\${sid}\\Software\\Policies\\Microsoft\\Windows\\Control Panel\\Desktop"
 # compliance::windows::item::w_5:screensavertimeoutvalue: 'ScreenSaveTimeOut'
-compliance::windows::item::w_5:screensavertimeoutdata: '900'
+compliance::windows::item::w_5:screensavertimeoutdata: 900
 
 # 6. Secure the SNMP service settings [If SNMP is installed or enabled]
 # compliance::windows::item::w_6:securesnmptitle: 'Secure the SNMP service - readonly'
