@@ -5,8 +5,12 @@
 # @example
 #   include compliance::windows::item::w_7
 class compliance::windows::item::w_7 {
-  exec { 'disable_guest':
-    command  => 'Get-LocalUser Guest | Disable-LocalUser',
-    provider => powershell,
+  # exec { 'disable_guest':
+  #   command  => 'Get-LocalUser Guest | Disable-LocalUser',
+  #   provider => powershell,
+  # }
+  local_security_policy { 'EnableGuestAccount':
+    ensure       => present,
+    policy_value => '0',
   }
 }
