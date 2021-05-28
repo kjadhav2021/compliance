@@ -11,8 +11,8 @@ class compliance::windows::item::w_5 {
 
   if $facts['cis_local_sids'] {
     $facts['cis_local_sids'].each |$sid| {
-      notify{ $sid:}
-      # notify{ $registry_keys: }
+      # notify{ $sid:}
+      notify{ $registry_keys: }
       # notify{ $registry_values: }
     }
   }
