@@ -4,15 +4,15 @@
 Facter.add(:filesystem) do
   confine kernel: 'windows'
   setcode do
-    sid_list = []
+    fs_list = []
     powershell = 'C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe'
-    command = '(Get-ChildItem "REGISTRY::HKEY_USERS").name'
+    command = '[system.io.driveinfo]::GetDrives() | format-table -property Name,Driveformat'
     value = Facter::Util::Resolution.exec(%(#{powershell} -command "#{command}"))
     value.split.each do |line|
-      if line =~ %r{S\-1\-5\-.*\d$}
-        sid_list << line.split('\\')[1]
-      end
+      # if line =~ %r{S\-1\-5\-.*\d$}
+        fs_list << line.gsub(" ","-")
+      # end
     end
-    sid_list
+    fs_list
   end
 end
