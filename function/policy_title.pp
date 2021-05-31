@@ -1,9 +1,9 @@
 # @summary This function construct standard policy title
 #
 # @example
-#   function compliance::policy_title(::policy_title('x_1', 'Ensure patching updated' )
+#   function compliance::rule_title(::policy_title('x_1', 'Ensure patching updated' )
 #
-function compliance::policy_title(
+function compliance::rule_title(
   String            $item_id           = '',
   String            $item_title        = '',
   Optional[String]  $item_setting      = '',

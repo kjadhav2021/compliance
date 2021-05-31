@@ -31,13 +31,14 @@ class compliance::windows::item::w_2 (
   $item_id      = 'w_2'
   $item_title   = 'Configure the time zone'
   $setting_desc = '(UTC+08:00) Kuala Lumpur, Singapore - Singapore Standard Time'
+  # include compliance::rule_title
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
   if $facts['timezone'] {
     if $facts['timezone'] != 'Singapore Standard Time' {
       if $report_only {
-        notify{ compliance::policy_title($item_id, $item_title, $setting_desc, ''):
+        notify{ compliance::rule_title($item_id, $item_title, $setting_desc, ''):
         message => 'Non-Compliant',
       }
       }
@@ -49,7 +50,7 @@ class compliance::windows::item::w_2 (
     }
   }
   else {
-    notify{ compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
+    notify{ compliance::rule_title($item_id, $item_title, 'Invalid facts', ''):
       message => 'Missing-Deps',
     }
   }

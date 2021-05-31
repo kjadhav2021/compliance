@@ -38,11 +38,11 @@ class compliance::windows::item::w_1 (
   if $facts['drive'] {
     ($facts['drive'].filter |$_k,$d| { $d['type'] == 'Fixed' and $d['filesystem'] != 'NTFS' } - $skips_drive).each |$k,$d| {
       if $report_only {
-        notify{ compliance::policy_title($item_id, $item_title, "${k}-${setting_desc}", "${k}-${d['filesystem']}"):
+        notify{ compliance::rule_title($item_id, $item_title, "${k}-${setting_desc}", "${k}-${d['filesystem']}"):
           message => 'Non-Compliant',
         }
       } else {
-        exec { compliance::policy_title($item_id, $item_title, "${k}-${setting_desc}", "${k}-${d['filesystem']}"):
+        exec { compliance::rule_title($item_id, $item_title, "${k}-${setting_desc}", "${k}-${d['filesystem']}"):
           path    => $facts['system32'],
           command => "cmd.exe /c echo|set /p=\"${d['volume_name']}\" | convert ${k} /fs:ntfs /X",
           unless  => "${facts['system32']}/WindowsPowershell/v1.0/powershell.exe 'if((Get-Volume ${k[0]}).FileSystem -ne \'NTFS\'){ exit 1 }'", # lint:ignore:140chars
@@ -50,7 +50,7 @@ class compliance::windows::item::w_1 (
       }
     }
   } else {
-    notify{ compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
+    notify{ compliance::rule_title($item_id, $item_title, 'Invalid facts', ''):
       message => 'Missing-Deps',
     }
   }
