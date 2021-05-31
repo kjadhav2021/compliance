@@ -33,7 +33,7 @@ class compliance::windows::item::w_3(
       }
     }
   } else {
-    notify{ compliance::policy_title($item_id, $item_title, setting_desc, 'PE patch not eabled for this node'):
+    notify{ compliance::policy_title($item_id, $item_title, $setting_desc, 'PE patch not eabled for this node'):
       message => 'Non-Compliant',
     }
   }
