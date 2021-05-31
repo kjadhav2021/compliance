@@ -23,7 +23,7 @@ class compliance::windows::item::w_3(
   # ----------------------------------------------------------------------
   if $facts['pe_patch'] {
     if $facts['pe_patch']['package_update_count'] > 0 or $facts['pe_patch']['security_package_update_count'] > 0 {
-      notify{ compliance::rule_title(
+      notify{ compliance::policy_title(
                 $item_id,
                 $item_title,
                 $setting_desc,
@@ -33,7 +33,7 @@ class compliance::windows::item::w_3(
       }
     }
   } else {
-    notify{ compliance::rule_title($item_id, $item_title, $setting_desc, 'PE patch not eabled for this node'):
+    notify{ compliance::policy_title($item_id, $item_title, $setting_desc, 'PE patch not eabled for this node'):
       message => 'Non-Compliant',
     }
   }
