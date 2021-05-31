@@ -28,7 +28,9 @@ class compliance::windows::item::w_1 (
   # }
   if $facts['filesystem'] {
     $facts['filesystem'].each |$drive| {
-      notify{ $drive:}
+      $condition=$drive.split('\s')
+      notify{ $condition[0]:}
+      notify{ $condition[1]:}
     }
     }
 }
