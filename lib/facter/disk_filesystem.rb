@@ -7,7 +7,7 @@ Facter.add(:filesystem) do
     command = '[system.io.driveinfo]::GetDrives() | format-table -property Name,Driveformat -hidetableheaders'
     value = Facter::Util::Resolution.exec(%(#{powershell} -command "#{command}"))
     value.split('/\n+/').each do |line|
-      filesystem_list << line.split(' ')[0] + '*' + line.split(' ')[1]
+      filesystem_list << line.split(' ')[0] + '-' + line.split(' ')[1]
     end
     filesystem_list
   end
