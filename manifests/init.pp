@@ -16,7 +16,7 @@ class compliance {
       # include compliance::windows::item::w_1
       include compliance::windows::item::w_2
       include compliance::windows::item::w_3
-      # include compliance::windows::item::w_4
+      include compliance::windows::item::w_4
     }
     default: {
       warning('N/A - Security compliance standard is implemented for this OS')
