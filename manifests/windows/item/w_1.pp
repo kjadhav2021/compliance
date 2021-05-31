@@ -21,16 +21,9 @@ class compliance::windows::item::w_1 (
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
-  # $facts['drive'].filter |$_k,$d| { $d['filesystem'] != 'NTFS' or $d['filesystem'] != '' }.each |$k,$d| {
-  #   notify{ bnm_compliance::policy_title($item_id, $item_title, "${setting_desc} ${k}", ''):
-  #     message => 'Non-Compliant',
-  #   }
-  # }
-  if $facts['filesystem'] {
-    $facts['filesystem'].each |$drive| {
-      $condition=split($drive,'-')
-      notify{ $condition[0]:}
-      notify{ $condition[1]:}
-      }
+  $facts['drive'].filter |$_k,$d| { $d['filesystem'] != 'NTFS' or $d['filesystem'] != '' }.each |$k,$d| {
+    notify{ bnm_compliance::policy_title($item_id, $item_title, "${setting_desc} ${k}", ''):
+      message => 'Non-Compliant',
     }
+  }
 }
