@@ -5,25 +5,18 @@
 # @example
 #   include compliance
 class compliance {
-  # include compliance::windows::item::w_1
-  include compliance::windows::item::w_2
-  # include compliance::windows::item::w_3
-  # include compliance::windows::item::w_4
-  # include compliance::windows::item::w_5
-  # include compliance::windows::item::w_6
-  # include compliance::windows::item::w_7
-  # include compliance::windows::item::w_8
-  # include compliance::windows::item::w_9
-  # include compliance::windows::item::w_10
-  # include compliance::windows::item::w_11
-  # include compliance::windows::item::w_12
-  # include compliance::windows::item::w_13
-  # include compliance::windows::item::w_14
-  # include compliance::windows::item::w_15
-  # include compliance::windows::item::w_16
-  # include compliance::windows::item::w_17
-  # include compliance::windows::item::w_18
-  # include compliance::windows::item::w_19
-  # include compliance::windows::item::w_20
-  # include compliance::windows::item::w_21
+  case $facts['osfamily'] {
+    'RedHat': {
+      info('RHEL security basline')
+      # include bnm_compliance::rhel
+    }
+    'windows': {
+      info('Windows security basline')
+      # include compliance::windows
+      include compliance::windows::item::w_1
+    }
+    default: {
+      warning('N/A - Security compliance standard is implemented for this OS')
+    }
+  }
 }
