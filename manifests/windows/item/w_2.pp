@@ -37,8 +37,9 @@ class compliance::windows::item::w_2 (
   if $facts['timezone'] {
     if $facts['timezone'] != 'Singapore Standard Time' {
       if $report_only {
-      notify{ compliance::policy_title($item_id, $item_title, $setting_desc, 'timezone has configured incorrectly'):
-        message => 'Non-Compliant',}
+        notify{ compliance::policy_title($item_id, $item_title, $setting_desc, ''):
+        message => 'Non-Compliant',
+      }
       }
     else {
       class { 'timezone_win':
