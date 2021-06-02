@@ -18,7 +18,7 @@
 # @param report_only Whether or not to set the resources to noop mode
 class compliance::windows::item::w_2 (
   Boolean $report_only    = true,
-  String  $system_timezone = 'Singapore Standard Time',
+  String  $system_timezone = 'Malay Peninsula Standard Time',
 ){
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }
@@ -30,24 +30,25 @@ class compliance::windows::item::w_2 (
 
   $item_id      = 'w_2'
   $item_title   = 'Configure the time zone'
-  $setting_desc = '(UTC+08:00) Kuala Lumpur, Singapore - Singapore Standard Time'
+  $setting_desc = '(UTC+08:00) Kuala Lumpur, Singapore - Malay Peninsula Standard Time'
   # include compliance::rule_title
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
   if $facts['timezone'] {
-    if $facts['timezone'] != 'Singapore Standard Time' {
+    if $facts['timezone'] != 'Malay Peninsula Standard Time' {
       if $report_only {
         notify{ compliance::policy_title($item_id, $item_title, $setting_desc, 'the timezone has not configured correctly.'):
         message => 'Non-Compliant',
       }
       }
     else {
-      class { 'timezone_win':
-      timezone => $system_timezone,
+      local_security_policy { 'Change the time zone':
+      ensure       => present,
+      policy_value => $system_timezone,
       }
     }
-    }
+  }
   }
   else {
     notify{ compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):

@@ -1,0 +1,84 @@
+---
+# Values for Compliance module
+#
+# 1. Setup the server using NTFS file system
+compliance::windows::item::w_1::skips_drive:
+- 'C:'
+# 2. Configure the time zone
+compliance::windows::item::w_2::system_timezone: Malay Peninsula Standard Time
+# w_4
+compliance::windows::item::w_4::inventory_map:
+  7_zip:
+    package_name: 7-Zip 19.00 (x64 edition)
+    source_url: https://www.7-zip.org/a/7z1900-x64.msi
+# 5. Enable the screen saver password [Optional]
+compliance::windows::item::w_5::screensaverissecuredata: '1'
+compliance::windows::item::w_5::screensavertimeoutdata: '900'
+# 6. Secure the SNMP service settings [If SNMP is installed or enabled]
+compliance::windows::item::w_6::community_string: 'TEJAq0jPaNXOUlDSyBdp'
+compliance::windows::item::w_6::community_type: '0x00000004'
+# 7. Disable the Guest account
+compliance::windows::item::w_7::policy_value: '0'
+# w_14
+compliance::windows::item::w_14::gpo: false
+compliance::windows::item::w_14::events_type:
+  Application:
+    MaxSize: '33554432'
+    Retention: '0'
+  Security:
+    MaxSize: '33554432'
+    Retention: '0'
+    WarningLevel: '90'
+  System:
+    MaxSize: '33554432'
+    Retention: '0'
+
+# w_15
+compliance::windows::item::w_15::permitted_shares:
+  Downloads:
+    Everyone:
+      access_control_type: Allow
+      access_right: Read
+compliance::windows::item::w_15:::skipped_shares:
+  - 'ADMIN$'
+  - 'IPC$'
+  - 'print$'
+compliance::windows::item::w_15:::skipped_drives_shares: true
+# w_16
+compliance::windows::item::w_16::directories_acl: {}
+# 17. Disable the DNS cache
+compliance::windows::item::w_17::policy_value1: '0xFF'
+compliance::windows::item::w_17::policy_value2: '0xFF'
+# 18. Disable the DNS cache
+compliance::windows::item::w_18::policy_value: '0x00000001'
+# 19. Disable the DNS cache
+compliance::windows::item::w_19::policy_value: '0x00000001'
+# 20. Disable/Lockdown USB devices
+compliance::windows::item::w_20::policy_value1: '0x00000001'
+compliance::windows::item::w_20::policy_value2: '0x00000000'
+# 21. Enforce strong/proper configuration of Windows Firewall Policy/Rule (if enabled) [Optional]
+compliance::windows::item::w_21::firewall_rules:
+  domain_profile:
+    firewall_state: 'on'
+    inbound_conn: 'blockinbound'
+    outbound_conn: 'allowoutbound'
+    disp_notification: 'enable'
+    allow_unicast: 'disable'
+    local_firewall_rules: 'n/a (gpo-store only)'
+    local_security_rules: 'n/a (gpo-store only)'
+  private_profile:
+    firewall_state: 'on'
+    inbound_conn: 'blockinbound'
+    outbound_conn: 'allowoutbound'
+    disp_notification: 'enable'
+    allow_unicast: 'disable'
+    local_firewall_rules: 'n/a (gpo-store only)'
+    local_security_rules: 'n/a (gpo-store only)'
+  public_profile:
+    firewall_state: 'on'
+    inbound_conn: 'blockinbound'
+    outbound_conn: 'allowoutbound'
+    disp_notification: 'enable'
+    allow_unicast: 'disable'
+    local_firewall_rules: 'n/a (gpo-store only)'
+    local_security_rules: 'n/a (gpo-store only)'
