@@ -6,7 +6,7 @@
 #   include compliance::windows::item::w_21
 class compliance::windows::item::w_21 (
   Boolean $report_only    = true,
-  Hash[String,String] $firewall_rules ={ 'domain_profile'  => [ {'firewall_state' => 'on'},
+  Hash $firewall_rules ={ 'domain_profile'  => [ {'firewall_state' => 'on'},
                                                       {'inbound_conn' => 'blockinbound'},
                                                       {'outbound_conn' => 'allowoutbound'},
                                                       {'disp_notification' => 'enable'},

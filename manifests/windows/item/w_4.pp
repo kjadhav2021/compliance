@@ -6,7 +6,7 @@
 #   include compliance::windows::item::w_4
 class compliance::windows::item::w_4 (
   Boolean $report_only    = true,
-  Hash[String,String] $inventory_map ={ '7_zip'  => [ {'package_name' => '7-Zip 19.00 (x64 edition)'},
+  Hash $inventory_map ={ '7_zip'  => [ {'package_name' => '7-Zip 19.00 (x64 edition)'},
                                                       {'source_url' => 'https://www.7-zip.org/a/7z1900-x64.msi'} ]},
 ) {
   # The below line sets this class and any contained classes/resources to noop/reporting mode
