@@ -23,7 +23,7 @@ class compliance::windows::item::w_4 (
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
-  $inventory_map = lookup('compliance::windows::item::w_4::inventory_map')
+  # $inventory_map = lookup('compliance::windows::item::w_4::inventory_map')
   $inventory_map.each | $inventory | {
     $package_name = $inventory[1][package_name]
     $source_url = $inventory[1][package_name]

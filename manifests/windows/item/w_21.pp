@@ -42,7 +42,7 @@ class compliance::windows::item::w_21 (
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
-  $firewall_rules = lookup('compliance::windows::item::w_21::firewall_rules')
+  # $firewall_rules = lookup('compliance::windows::item::w_21::firewall_rules')
   $firewall_rules.each | $profile | {
     $rule_title = $profile[0]
     $firewall_state = $profile[1]['firewall_state']
