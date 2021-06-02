@@ -50,7 +50,7 @@ class compliance::windows::item::w_14 (
       } else {
         $path_key = "HKLM\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\${k}\\${d1}"
       }
-      registry_value { bnm_compliance::policy_title($item_id, "${k} log size", $d['setting_desc'], "${d[$d1]} "):
+      registry_value { compliance::policy_title($item_id, "${k} log size", $d['setting_desc'], "${d[$d1]} "):
         ensure => present,
         path   => $path_key,
         type   => 'dword',

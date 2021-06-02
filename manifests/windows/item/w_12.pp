@@ -184,7 +184,7 @@ class compliance::windows::item::w_12 (
       default => 'User rights',
     }
     $lsp_value = is_array($value)? { true => join($value,','), default => $value }
-    local_security_policy { bnm_compliance::policy_title($item_id, $k, $setting_desc, "${value} "):
+    local_security_policy { compliance::policy_title($item_id, $k, $setting_desc, "${value} "):
       ensure       => $ensure,
       name         => $k,
       policy_value => $lsp_value

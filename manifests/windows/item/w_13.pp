@@ -265,7 +265,7 @@ class compliance::windows::item::w_13 (
         default => 'Security options',
       }
       if $d['path'] {
-        registry_value { bnm_compliance::policy_title($item_id, $k, $setting_desc, "${value} "):
+        registry_value { compliance::policy_title($item_id, $k, $setting_desc, "${value} "):
           ensure => $ensure,
           path   => $d['path'],
           type   => $d['type'],
@@ -273,7 +273,7 @@ class compliance::windows::item::w_13 (
         }
       } else {
         $lsp_value = is_array($value)? { true => join($value,','), default => $value.strip }
-        local_security_policy { bnm_compliance::policy_title($item_id, $k, $setting_desc, "${value} "):
+        local_security_policy { compliance::policy_title($item_id, $k, $setting_desc, "${value} "):
           ensure       => $ensure,
           name         => $k,
           policy_value => $lsp_value

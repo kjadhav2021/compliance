@@ -34,12 +34,12 @@ class compliance::windows::item::w_15 (
       if $permitted_shares[$s] and $permitted_shares[$s] != $d['permissions'] {
         $setting_desc = "${s} invalid shares permission ${$d['permissions']}"
         if $report_only {
-          notify{ bnm_compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
+          notify{ compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
             message => 'Non-Compliant',
           }
         } else {
           # Rebuild shares
-          exec { bnm_compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
+          exec { compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
             command  => "exit (Remove-SmbShare -Name '${s}' -Force).ReturnValue",
             provider => powershell,
           }
@@ -47,11 +47,11 @@ class compliance::windows::item::w_15 (
       } elsif $permitted_shares[$s] == undef {
         $setting_desc = "${s} non-permitted shares"
         if $report_only {
-          notify{ bnm_compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
+          notify{ compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
             message => 'Non-Compliant',
           }
         } else {
-          exec { bnm_compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
+          exec { compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
             command  => "exit (Remove-SmbShare -Name '${s}' -Force).ReturnValue",
             provider => powershell,
           }
@@ -59,7 +59,7 @@ class compliance::windows::item::w_15 (
       }
     }
   } else {
-    notify{ bnm_compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
+    notify{ compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
       message => 'Missing-Deps',
     }
   }
