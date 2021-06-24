@@ -2,21 +2,22 @@ require 'facter'
 require 'json'
 require 'open3'
 require 'utils/win_helper'
-require 'win32/service'
 
 powershellcmd = "#{ENV['windir']}/system32/WindowsPowershell/v1.0/powershell.exe "
+protocal_list = ['SSL 2.0', 'SSL 3.0', 'TLS 1.0', 'TLS 1.1', 'TLS 1.2']
 
 if Facter.value(:kernel) == 'windows'
-  raw_os_drive = Facter::Core::Execution.execute(powershellcmd + '"Get-WmiObject -Class Win32_Logicaldisk | Select-Object -Property DeviceID, DriveType, FreeSpace, Size, VolumeName, FileSystem | ConvertTo-Json"') # rubocop:disable Metrics/LineLength
+  raw_os_drive = Facter::Core::Execution.execute(powershellcmd + '"Get-WmiObject -Class Win32_Logicaldisk | Select-Object -Property DeviceID, DriveType, FreeSpace, Size, VolumeName, FileSystem | ConvertTo-Json -Compress"') # rubocop:disable Metrics/LineLength
 
   if %r{2008}.match?(Facter.value(:operatingsystemrelease))
     os_partition = {}
   else
-    raw_os_partition = Facter::Core::Execution.execute(powershellcmd + '"Get-Disk | Select-Object -Property Number, SerialNumber, FriendlyName, OperationalStatus, size, PartitionStyle, isBoot, isSystem, isReadOnly, isOffline, isClustered, HealthStatus | ConvertTo-Json"') # rubocop:disable Metrics/LineLength
+    raw_os_partition = Facter::Core::Execution.execute(powershellcmd + '"Get-Disk | Select-Object -Property Number, SerialNumber, FriendlyName, OperationalStatus, size, PartitionStyle, isBoot, isSystem, isReadOnly, isOffline, isClustered, HealthStatus | ConvertTo-Json -Compress"') # rubocop:disable Metrics/LineLength
     os_partition_item = raw_os_partition.empty? ? [] : JSON.parse(raw_os_partition)
     os_partition = os_partition_item.is_a?(Hash) ? [os_partition_item] : os_partition_item
   end
 
+  # windows drives
   unless raw_os_drive.nil?
     os_drive = JSON.parse(raw_os_drive)
     drive = {}
@@ -35,14 +36,15 @@ if Facter.value(:kernel) == 'windows'
     end
   end
 
-  raw_shares = Facter::Core::Execution.execute(powershellcmd + '"get-WmiObject -Class Win32_Share | Select-Object -Property Name, Path, Description| ConvertTo-Json"')
+  # windows shares
+  raw_shares = Facter::Core::Execution.execute(powershellcmd + '"Get-WmiObject -Class Win32_Share | Select-Object -Property Name, Path, Description| ConvertTo-Json -Compress"')
   unless raw_shares.nil?
     shares_data = JSON.parse(raw_shares)
     shares = {}
     shares_data.each do |s|
       shares_permissions = {}
       name = s['Name']
-      raw_shares_permissions = Facter::Core::Execution.execute(powershellcmd + '"Get-SmbShareAccess ' + name + ' | Select-Object -Property AccountName, AccessControlType, AccessRight| ConvertTo-Json"') # rubocop:disable Metrics/LineLength
+      raw_shares_permissions = Facter::Core::Execution.execute(powershellcmd + '"Get-SmbShareAccess ' + name + ' | Select-Object -Property AccountName, AccessControlType, AccessRight| ConvertTo-Json -Compress"') # rubocop:disable Metrics/LineLength
       unless raw_shares_permissions.nil?
         shares_permissions_data = JSON.parse(raw_shares_permissions)
         shares_permissions_data = shares_permissions_data.is_a?(Hash) ? [shares_permissions_data] : shares_permissions_data
@@ -52,6 +54,19 @@ if Facter.value(:kernel) == 'windows'
         end
       end
       shares[name] = { 'path' => s['Path'], 'description' => s['Description'], 'permissions' => shares_permissions }
+    end
+  end
+
+  # server protocal
+  windows_protocals = {}
+  protocal_list.each do |k|
+    ['Server', 'Client'].each do |t|
+      regkey = "HKLM:SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\#{k}\\#{t}\\"
+      pscmd = "Get-ItemProperty '#{regkey}' | Select-Object Enabled, DisabledByDefault | ConvertTo-Json -Compress"
+      raw_sp_data = Facter::Core::Execution.execute("#{powershellcmd} \"#{pscmd}\"")
+      sp_data = JSON.parse(raw_sp_data) unless raw_sp_data.empty?
+      windows_protocals[t] = {} if windows_protocals[t].nil?
+      windows_protocals[t][k] = { 'enabled' => sp_data['Enabled'], 'disabledbydefault' => sp_data['DisabledByDefault'] } unless sp_data.nil?
     end
   end
 end
@@ -99,11 +114,17 @@ end
 Facter.add('windows_firewall') do
   confine osfamily: :windows
   setcode do
-    firewall_srv = 'MpsSvc'
-    if ::Win32::Service.exists?(firewall_srv) && ::Win32::Service.status(firewall_srv)['current_state'] == 'running'
-      Puppet::Resource.indirection.search('windowsfirewall').map { |f|
-        YAML.safe_load(f.to_hierayaml)
-      }.reduce({}, :merge)
+    begin
+      require 'win32/service'
+      firewall_srv = 'MpsSvc'
+      if ::Win32::Service.exists?(firewall_srv) && ::Win32::Service.status(firewall_srv)['current_state'] == 'running'
+        Puppet::Resource.indirection.search('windowsfirewall').map { |f|
+          YAML.safe_load(f.to_hierayaml)
+        }.reduce({}, :merge)
+      end
+    rescue
+      # do nothing but comment
+      nil
     end
   end
 end
@@ -111,3 +132,4 @@ end
 Facter.add('partition') { setcode { os_partition } } unless os_partition.nil?
 Facter.add('drive') { setcode { drive } } unless drive.nil?
 Facter.add('windows_shares') { setcode { shares } } unless shares.nil?
+Facter.add('windows_protocals') { setcode { windows_protocals } } unless windows_protocals.nil?
