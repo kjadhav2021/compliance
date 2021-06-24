@@ -4,43 +4,27 @@
 #
 # @example
 #   include compliance::windows::item::w_9
-class compliance::windows::item::w_9 {
+class compliance::windows::item::w_9 (
+  Hash $security_policies,
+  Boolean $report_only = true,
+){
+# The below line sets this class and any contained classes/resources to noop/reporting mode
+  if $report_only { noop() }
+
+  Notify {
+    tag       => ['compliance_rule'],
+    loglevel  => 'debug'
+  }
+
+  $item_id      = 'w_9'
+  $item_title   = 'Enforce a strong password and account policy'
+  $setting_desc = 'Enforce a strong password and account policy'
+
+  # Below this line comes all Puppet code required to enforce the standard
+  # ----------------------------------------------------------------------
   # Password policy
-  local_security_policy { 'Enforce password history':
-    ensure       => present,
-    policy_value => '24',
+  Local_security_policy {
+    ensure => present,
   }
-  local_security_policy { 'Maximum password age':
-    ensure       => present,
-    policy_value => '60',
-  }
-  local_security_policy { 'Minimum password age':
-    ensure       => present,
-    policy_value => '1',
-  }
-  local_security_policy { 'Minimum Password Length':
-    ensure       => present,
-    policy_value => '14',
-  }
-  local_security_policy { 'Password must meet complexity requirements':
-    ensure       => present,
-    policy_value => 'Enabled',
-  }
-  local_security_policy { 'Store passwords using reversible encryption':
-    ensure       => present,
-    policy_value => 'Disabled',
-  }
-  # Account Lockout policy
-  local_security_policy { 'Account lockout duration':
-    ensure       => present,
-    policy_value => '30',
-  }
-  local_security_policy { 'Account lockout threshold':
-    ensure       => present,
-    policy_value => '50',
-  }
-  local_security_policy { 'Reset account lockout counter after':
-    ensure       => present,
-    policy_value => '15',
-  }
+  create_resources(local_security_policy,$security_policies)
 }

@@ -120,6 +120,36 @@ compliance::windows::item::w_8::services:
     enable: 'manual'
   LanmanWorkstation:
     enable: 'true'
+
+# w_9
+compliance::windows::item::w_9::security_policies:
+  Enforce_password_history:
+    title: 'Enforce password history'
+    policy_value: '24'
+  Maximum_password_age:
+    title: 'Maximum password age'
+    policy_value: '60'
+  Minimum_password_age:
+    title: 'Minimum password age'
+    policy_value: '1'
+  complexity_requirements:
+    title: 'Password must meet complexity requirements'
+    policy_value: 'Enabled'
+  reverse_encryption:
+    title: 'Store passwords using reversible encryption'
+    policy_value: 'disabled'
+  Minimum_Password_Length:
+    title: 'Minimum Password Length'
+    policy_value: '14'
+  Account_lockout_duration:
+    title: 'Account lockout duration'
+    policy_value: '30'
+  Account_lockout_threshold:
+    title: 'Account lockout threshold'
+    policy_value: '50'
+  Lockout_counter:
+    title: 'Reset account lockout counter after'
+    policy_value: '15'
 # w_14
 compliance::windows::item::w_14::gpo: false
 compliance::windows::item::w_14::events_type:
