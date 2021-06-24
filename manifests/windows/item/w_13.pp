@@ -278,6 +278,13 @@ class compliance::windows::item::w_13 (
           name         => $k,
           policy_value => $lsp_value
         }
+        unless $k $facts['fips_enabled'] {
+          file_line { 'append config file':
+            ensure => present,
+            line   => 'digest_algorithm = sha256',
+            path   => 'C:/ProgramData/PuppetLabs/puppet/etc/puppet.conf',
+          }
+        }
       }
     }
   }

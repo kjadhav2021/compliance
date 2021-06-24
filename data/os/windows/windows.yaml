@@ -19,6 +19,107 @@ compliance::windows::item::w_6::community_string: 'TEJAq0jPaNXOUlDSyBdp'
 compliance::windows::item::w_6::community_type: '0x00000004'
 # 7. Disable the Guest account
 compliance::windows::item::w_7::policy_value: '0'
+# 8 . Configure required services only
+compliance::windows::item::w_8::services:
+  ALG:
+    enable: 'manual'
+  AppMgmt:
+    enable: 'manual'
+  BITS:
+    enable: 'true'
+  EventSystem:
+    enable: 'manual'
+  COMSysApp:
+    enable: 'manual'
+  CryptSvc:
+    ensure: 'running'
+    enable: 'true'
+  TrkWks:
+    ensure: 'stopped'
+    enable: 'false'
+  MSDTC:
+    ensure: 'stopped'
+    enable: 'false'
+  SharedAccess:
+    ensure: 'stopped'
+    enable: 'false'
+  PolicyAgent:
+    ensure: 'running'
+    enable: 'true'
+  swprv:
+    enable: 'manual'
+  Netman:
+    enable: 'manual'
+  NlaSvc:
+    enable: 'manual'
+  WPDBusEnum:
+    enable: 'manual'
+  Power:
+    enable: 'true'
+  SessionEnv:
+    enable: 'manual'
+  TermService:
+    enable: 'manual'
+  UmRdpService:
+    enable: 'manual'
+  RpcSs:
+    ensure: 'running'
+    enable: 'true'
+  RpcLocator:
+    ensure: 'running'
+    enable: 'true'
+  RemoteRegistry:
+    ensure: 'running'
+    enable: 'true'
+  RSoPProv:
+    enable: 'manual'
+  RemoteAccess:
+    ensure: 'stopped'
+    enable: 'false'
+  seclogon:
+    enable: 'manual'
+  SamSs:
+    ensure: 'running'
+    enable: 'true'
+  LanmanServer:
+    ensure: 'running'
+    enable: 'true'
+  ShellHWDetection:
+    ensure: 'running'
+    enable: 'true'
+  SCardSvr:
+    enable: 'manual'
+  SCPolicySvc:
+    enable: 'manual'
+  sacsvr:
+    enable: 'manual'
+  lmhosts:
+    enable: 'true'
+  Themes:
+    ensure: 'stopped'
+    enable: 'false'
+  vds:
+    enable: 'manual'
+  Audiosrv:
+    enable: 'manual'
+  WerSvc:
+    enable: 'manual'
+  EventLog:
+    enable: 'true'
+  msiserver:
+    enable: 'manual'
+  Winmgmt:
+    enable: 'true'
+  W32Time:
+    enable: 'manual'
+  wuauserv:
+    enable: 'true'
+  WinHttpAutoProxySvc:
+    enable: 'manual'
+  wmiApSrv:
+    enable: 'manual'
+  LanmanWorkstation:
+    enable: 'true'
 # w_14
 compliance::windows::item::w_14::gpo: false
 compliance::windows::item::w_14::events_type:

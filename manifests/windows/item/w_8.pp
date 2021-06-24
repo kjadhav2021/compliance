@@ -4,7 +4,29 @@
 #
 # @example
 #   include compliance::windows::item::w_8
-class compliance::windows::item::w_8 {
+class compliance::windows::item::w_8 (
+  Boolean $report_only = true,
+  Hash $services,
+  ){
+
+  # The below line sets this class and any contained classes/resources to noop/reporting mode
+  if $report_only { noop() }
+
+  Notify {
+    tag       => ['compliance_rule'],
+    loglevel  => 'debug'
+  }
+
+  $item_id      = 'w_8'
+  $item_title   = 'Configure only required services'
+  $setting_desc = 'Configure required services using services.msc'
+
+  # Below this line comes all Puppet code required to enforce the standard
+  # ----------------------------------------------------------------------
+  Service{
+    provider => 'windows',
+  }
+
   service { 'ALG':
     enable   => 'manual',
     provider => 'windows',
