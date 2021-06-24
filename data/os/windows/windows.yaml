@@ -139,7 +139,7 @@ compliance::windows::item::w_9::security_policies:
     title: 'Store passwords using reversible encryption'
     policy_value: 'disabled'
   Minimum_Password_Length:
-    title: 'Minimum Password Length'
+    title: 'Minimum password length'
     policy_value: '14'
   Account_lockout_duration:
     title: 'Account lockout duration'
