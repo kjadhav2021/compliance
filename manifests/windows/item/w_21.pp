@@ -57,8 +57,8 @@ class compliance::windows::item::w_21 (
       filename                   => '%systemroot%\system32\logfiles\firewall\pfirewall.log',
       firewallpolicy             => "${inbound_conn},${outbound_conn}",
       inboundusernotification    => $disp_notification,
-      localconsecrules           => $local_firewall_rules,
-      localfirewallrules         => $local_security_rules,
+      # localconsecrules           => $local_firewall_rules,
+      # localfirewallrules         => $local_security_rules,
       state                      => $firewall_state,
       unicastresponsetomulticast => $allow_unicast,
     }
