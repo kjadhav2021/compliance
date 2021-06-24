@@ -124,10 +124,10 @@ compliance::windows::item::w_8::services:
 # w_9
 compliance::windows::item::w_9::security_policies:
   Enforce_password_history:
-    Name: 'Enforce password history'
+    title: 'Enforce password history'
     policy_value: '24'
   Maximum_password_age:
-    Name: 'Maximum password age'
+    title: 'Maximum password age'
     policy_value: '60'
   Minimum_password_age:
     title: 'Minimum password age'
