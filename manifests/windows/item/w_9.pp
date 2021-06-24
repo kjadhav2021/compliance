@@ -29,6 +29,7 @@ class compliance::windows::item::w_9 (
   # create_resources(local_security_policy,$security_policies)
   $security_policies.each | $k,$d | {
     local_security_policy { $d['Name']:
+      title        => $d['Name'],
       policy_value => $d['policy_value'],
     }
   }
