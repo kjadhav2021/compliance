@@ -20,8 +20,8 @@ class compliance::windows::item::w_17 (
   $item_id      = 'w_18'
   $item_title1   = 'Disable Autorun on drives'
   $setting_desc1 = 'Disable Autorun on CD drives'
-  $item_title2   = 'Disable Autorun on drives'
-  $setting_desc2 = 'Disable Autorun on CD drives'
+  $item_title2   = 'Disable Autorun all drives'
+  $setting_desc2 = 'Disable Autorun on all drives'
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
