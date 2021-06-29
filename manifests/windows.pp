@@ -22,7 +22,7 @@ class compliance::windows (
     'w_10',
     'w_11',
     'w_12',
-    # 'w_13',
+    'w_13',
     'w_14',
     'w_15',
     'w_16',
