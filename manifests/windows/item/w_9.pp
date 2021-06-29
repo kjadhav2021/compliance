@@ -1,9 +1,23 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_9
 #
-# A description of what this class does
+# **Title:** Enforce a strong password and account policy
 #
-# @example
-#   include compliance::windows::item::w_9
+# **Description:** Password policies help administrators enforce the strength of passwords that users can set.
+#                  Password policy is required to control user password characteristics including password minimum
+#                  length, maximum length and password aging.
+#
+# **Impact:** Brute forcing the weak passwords can result in unauthorized access.
+#
+# **Risk Rating:** High
+#
+# **Standard Setting:** Click Start > Run and type gpedit.msc
+#                       Expand Computer Configuration > Windows Settings > Security Settings
+#                       > Account Policy > Password Policy or Account Lockout Policy container
+# **Note:** Note: These settings will be applied after a reboot. To apply the settings instantly,
+#                 right click on Security Settings and select Reload.
+#
+# @param security_policies security policies that need to be enforced
+# @param report_only Whether or not to set the resources to noop mode
 class compliance::windows::item::w_9 (
   Hash $security_policies,
   Boolean $report_only = true,

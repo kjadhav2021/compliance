@@ -2,10 +2,9 @@
 #
 # **Title:** Enable Auditing and Logging
 #
-# **Description:** Windows Server provides us Advance Audit Policy Configuration function. 
-#                   It can be used to provide detailed control over audit policies, identify attempted or 
-#                   successful attacks on your network and resources, and verify compliance with rules governing
-#                   the management of critical organizational assets.
+# **Description:** Windows Server 2016 provides us Advance Audit Policy Configuration function.
+# It can be used to provide detailed control over audit policies, identify attempted or successful attacks on your network
+# and resources, and verify compliance with rules governing the management of critical organizational assets.
 #
 # **Impact:** Unauthorized activities can go undetected.
 #
@@ -17,7 +16,9 @@
 #           (Windows Vista or later) to override audit policy category settings” policy setting under Local Policies\Security
 #           Options must also be enabled.
 #
+#
 # @param report_only Whether or not to set the resources to noop mode
+# @param audit_items audit and logging events map
 #
 ##
 class compliance::windows::item::w_11 (

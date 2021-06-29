@@ -1,9 +1,23 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_3
 #
-# A description of what this class does
+# **Title:** Install service pack and patches
 #
-# @example
-#   include compliance::windows::item::w_3
+# **Description:** Service packs and patches provide the OS enhancements and latest updates against vulnerabilities.
+#                  Security Patches to be deployed in line with the requirement stipulated in the Patch Management Procedure.
+#
+# **Impact:** System vulnerabilities when exploited could result to system compromised,
+#             unauthorised elevation of privilege, loss of data/ data integrity as well as denial of service.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Download and install service pack and patches from the following URL:
+#                        http://support.microsoft.com/default.aspx?scid=fh;en-us;sp
+#
+# **Note:** Latest service pack and patches are required for initial server installation.
+#           Subsequent updates depends on the Patch Management Procedure requirements.
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
 class compliance::windows::item::w_3(
   Boolean $report_only    = true,
 ) {
@@ -23,7 +37,7 @@ class compliance::windows::item::w_3(
   # ----------------------------------------------------------------------
   if $facts['pe_patch'] {
     if $facts['pe_patch']['package_update_count'] > 0 or $facts['pe_patch']['security_package_update_count'] > 0 {
-      notify{ compliance::policy_title(
+      notify { compliance::policy_title(
                 $item_id,
                 $item_title,
                 $setting_desc,
@@ -33,7 +47,7 @@ class compliance::windows::item::w_3(
       }
     }
   } else {
-    notify{ compliance::policy_title($item_id, $item_title, $setting_desc, 'PE patch not eabled for this node'):
+    notify { compliance::policy_title($item_id, $item_title, $setting_desc, 'PE patch not eabled for this node'):
       message => 'Non-Compliant',
     }
   }

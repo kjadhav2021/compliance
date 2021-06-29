@@ -1,9 +1,24 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_17
 #
-# A description of what this class does
+# **Title:** Disable Autorun on drives
 #
-# @example
-#   include compliance::windows::item::w_17
+# **Description:** A default OS installation enables autorun on CD-ROM and other drives. Autorun feature of a CD-ROM or
+# other drive presents a potential security threat by automatically running code when a CD is inserted into a machine.
+#
+# **Impact:** Automatic execution of programs can lead to denial of service or unauthorized control of system.
+#
+# **Risk Rating:** Low
+#
+# **Standard Setting:** Disable Autorun on CD-ROM and all other Drives.
+# Click Start > Run and type regedit Go to the registry hive:
+#               HKEY_LOCAL_MACHINE\ SYSTEM\CurrentControlSet\Services\CDROM\AutoRun = '0XFF'
+#               HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun = '0XFF'
+# **Note:** Screen saver password is required for servers located outside from Data Centre.
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param policy_value1 autorun registry value '0XFF'
+# @param policy_value2 NoDriveTypeAutoRun registry value '0XFF'
 class compliance::windows::item::w_17 (
   Boolean $report_only = true,
   String $policy_value1 = '0xFF',

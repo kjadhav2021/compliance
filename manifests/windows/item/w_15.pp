@@ -1,9 +1,24 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_15
 #
-# A description of what this class does
+# **Title:** Assign secure permissions to shares
 #
-# @example
-#   include compliance::windows::item::w_15
+# **Description:** Windows Server 2016 allows various access levels for file sharing between
+# users.
+#
+# **Impact:** Weak shares can leak confidential data to unauthorized users.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Restrict access on shares for specific users/groups with appropriate permissions.
+# Click Start > Run and type compmgmt.msc Expand Shared Folders > Shares container
+# Double click on each and every custom created share name (except Admin$, IPC$, Print$, C$, D$, <Drive letter>$ etc.)
+# Go to Sharing Permission tab and set the permission for each user/group
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param permitted_shares permitted_shares map
+# @param skipped_shares skipped shares name String array
+# @param skipped_drives_shares skip drives flag true/false
 class compliance::windows::item::w_15 (
   Boolean         $report_only            = true,
   Hash            $permitted_shares       = { 'Downloads' => { 'Everyone' =>
@@ -34,7 +49,7 @@ class compliance::windows::item::w_15 (
       if $permitted_shares[$s] and $permitted_shares[$s] != $d['permissions'] {
         $setting_desc = "${s} invalid shares permission ${$d['permissions']}"
         if $report_only {
-          notify{ compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
+          notify { compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
             message => 'Non-Compliant',
           }
         } else {
@@ -47,7 +62,7 @@ class compliance::windows::item::w_15 (
       } elsif $permitted_shares[$s] == undef {
         $setting_desc = "${s} non-permitted shares"
         if $report_only {
-          notify{ compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
+          notify { compliance::policy_title($item_id, $item_title, $setting_desc, "${s}-${d['permissions']}"):
             message => 'Non-Compliant',
           }
         } else {
@@ -59,7 +74,7 @@ class compliance::windows::item::w_15 (
       }
     }
   } else {
-    notify{ compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
+    notify { compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
       message => 'Missing-Deps',
     }
   }

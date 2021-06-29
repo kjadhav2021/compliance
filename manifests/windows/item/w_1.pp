@@ -17,9 +17,10 @@
 #
 #
 # @param report_only Whether or not to set the resources to noop mode
+# @param skips_drive skip drives from enforcement.
 class compliance::windows::item::w_1 (
-  Boolean         $report_only    = true,
-  Array[String]   $skips_drive     = ['C:']
+  Boolean $report_only       = true,
+  Array[String] $skips_drive = ['C:']
 ) {
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }
@@ -36,13 +37,14 @@ class compliance::windows::item::w_1 (
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
   if $facts['drive'] {
+    #  excluding skips_drives items from $facts[drive] using minus operator
     ($facts['drive'].filter |$_k,$d| { $d['type'] == 'Fixed' and $d['filesystem'] != 'NTFS' } - $skips_drive).each |$k,$d| {
       if $report_only {
-        notify{ compliance::policy_title($item_id, $item_title, "${k}-${setting_desc}", "${k}-${d['filesystem']}"):
+        notify { compliance::policy_title($item_id, $item_title, "${k}-${setting_desc}", "${k} - ${d['filesystem']}" ):
           message => 'Non-Compliant',
         }
       } else {
-        exec { compliance::policy_title($item_id, $item_title, "${k}-${setting_desc}", "${k}-${d['filesystem']}"):
+        exec { compliance::policy_title($item_id, $item_title, "${k}-${setting_desc}", "${k} - ${d['filesystem']}" ):
           path    => $facts['system32'],
           command => "cmd.exe /c echo|set /p=\"${d['volume_name']}\" | convert ${k} /fs:ntfs /X",
           unless  => "${facts['system32']}/WindowsPowershell/v1.0/powershell.exe 'if((Get-Volume ${k[0]}).FileSystem -ne \'NTFS\'){ exit 1 }'", # lint:ignore:140chars
@@ -50,7 +52,7 @@ class compliance::windows::item::w_1 (
       }
     }
   } else {
-    notify{ compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
+    notify { compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
       message => 'Missing-Deps',
     }
   }

@@ -1,9 +1,27 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_21
 #
-# A description of what this class does
+# **Title:** Enforce strong/proper configuration of Windows Firewall Policy/Rule (if enabled) [Optional]
 #
-# @example
-#   include compliance::windows::item::w_21
+# **Description:** Windows Firewall helps protect the server by preventing unauthorized users from gaining access
+# to the server through the Internet or a network. It can also stop types of malicious software that use network
+# traffic to spread themselves, like Trojan horse attacks and worms. Another useful capability is that it can filter
+# both outgoing and incoming connections and block those which are unwanted.
+#
+# **Impact:** Unauthorized access and spread of malicious software.
+#
+# **Risk Rating:** High
+#
+# **Standard Setting:** 1. Open the Server manager from the task bar.
+# 2. On the right-hand side in the top navigation bar, click Tools and select Windows
+# Firewall with Advanced Security.
+# 3. ReviewthecurrentconfigurationsettingsbyselectingWindowsFirewallProperties from the Windows
+# Firewall Microsoft Management Console (MMC) landing page. Access and modify the setting for each of the
+# three firewall profiles, Domain, Private, and Public, as well as IPSec setting.
+# **Note:** Screen saver password is required for servers located outside from Data Centre.
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param firewall_rules firewall rules map
 class compliance::windows::item::w_21 (
   Boolean $report_only    = true,
   Hash $firewall_rules ={ 'domain_profile'  => [ {'firewall_state' => 'on'},

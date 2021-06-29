@@ -1,9 +1,20 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_12
 #
-# A description of what this class does
+# **Title:** Configure strong user rights
 #
-# @example
-#   include compliance::windows::item::w_12
+# **Description:** User rights are typically assigned on the basis of the security groups to which a user belongs,
+#                  such as Administrators, Power Users or Users. Below are the list of configuration that require attention.
+#
+# **Impact:** Malicious user can modify system configuration leading to non-availability of system, unauthorized access to critical data.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Click Start > Run and type gpedit.msc
+#                       Expand Computer Configuration > Windows Settings > Security Settings >
+#                       Local Policies > User Rights Assignment container
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param policy_items URA policy map
 class compliance::windows::item::w_12 (
   Boolean $report_only      = true,
   Hash    $policy_items     = { 'Access Credential Manager as a trusted caller' => {

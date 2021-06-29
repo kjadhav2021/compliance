@@ -1,9 +1,21 @@
-# @summary
-# 18.Configure the system not to respond to name release command
+# compliance::windows::item::w_18
 #
+# **Title:** Configure the system not to respond to name release command
 #
-# @example
-#   include compliance::windows::item::w_18
+# **Description:** This parameter determines whether the computer releases its NetBIOS
+#                   name when it receives a name-release request from the network.
+#
+# **Impact:** Server is vulnerable to malicious name-release attack leading to Denial of Service.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Configure the system registry as show below:
+#                       Click Start > Run and type regedit
+#                       Go to the registry hive, create or set the registry key
+#                       HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netbt\Parameters\NoNameReleaseOnDemand = 1
+#
+# @param report_only Whether or not to set the resources to noop mode
+#  @param policy_value registry value = 0x00000001
 class compliance::windows::item::w_18 (
   Boolean $report_only = true,
   String $policy_value = '0x00000001',

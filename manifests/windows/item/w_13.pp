@@ -1,9 +1,19 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_13
 #
-# A description of what this class does
+# **Title:** Configure security options for the system
 #
-# @example
-#   include compliance::windows::item::w_13
+# **Description:** Security options on a Windows Server 2016 system are configurable.
+#
+# **Impact:** Critical system information can be modified leading to non-availability of system and unauthorized access to critical data.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Click Start > Run and type gpedit.msc
+# Expand Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options container
+# Configure security options in Windows Server2016
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param policy_items local policies map
 class compliance::windows::item::w_13 (
   Boolean $report_only    = true,
   Hash    $policy_items     = { 'Accounts: Administrator account status' => {

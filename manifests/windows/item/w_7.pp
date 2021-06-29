@@ -1,9 +1,20 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_7
 #
-# A description of what this class does
+# **Title:** Disable the Guest account
 #
-# @example
-#   include compliance::windows::item::w_7
+# **Description:** A default Windows Server 2016 installation creates a guest account.
+#
+# **Impact:** The guest account may allow unauthorized access.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Disable the guest account from computer management.
+#                       Click Start > Run and type compmgmt.msc
+#                       Expand Local User & Groups > Users container
+#                       Disable the Guest account
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param policy_value 0 or 1 to disable or enable local security policy respectively
 class compliance::windows::item::w_7 (
   Boolean $report_only = true,
   String $policy_value = '0',

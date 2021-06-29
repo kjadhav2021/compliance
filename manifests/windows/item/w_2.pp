@@ -16,6 +16,7 @@
 #
 #
 # @param report_only Whether or not to set the resources to noop mode
+# @param system_timezone default system timezone.
 class compliance::windows::item::w_2 (
   Boolean $report_only    = true,
   String  $system_timezone = 'Malay Peninsula Standard Time',
@@ -38,20 +39,20 @@ class compliance::windows::item::w_2 (
   if $facts['timezone'] {
     if $facts['timezone'] != 'Malay Peninsula Standard Time' {
       if $report_only {
-        notify{ compliance::policy_title($item_id, $item_title, $setting_desc, 'the timezone has not configured correctly.'):
+        notify { compliance::policy_title($item_id, $item_title, $setting_desc, 'the timezone has not configured correctly.'):
         message => 'Non-Compliant',
       }
       }
     else {
       local_security_policy { 'Change the time zone':
-      ensure       => present,
-      policy_value => $system_timezone,
+        ensure       => present,
+        policy_value => $system_timezone,
       }
     }
   }
   }
   else {
-    notify{ compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
+    notify { compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
       message => 'Missing-Deps',
     }
   }

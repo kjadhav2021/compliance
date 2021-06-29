@@ -1,8 +1,24 @@
-# @summary
-# 14.Allocate adequate space for the for Event viewer logs
+# compliance::windows::item::w_14
 #
-# @example
-#   include compliance::windows::item::w_14
+# **Title:** Allocate adequate space for the for Event viewer logs
+#
+# **Description:** All system-generated messages are logged and can be viewed using event
+#                  viewer.
+#
+# **Impact:** Critical logs might get overwritten in the absence of sufficient event viewer file size.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Set event viewer files size as mentioned in the following:
+# Click Start > Run and type eventvwr.msc
+# Right click on Application/ Security/ System, choose the Properties and set the Maximum Log Size 30MB
+# Set the Security Log Near Capacity Warning to 90%. This is the Percentage threshold for the security event log when
+# the system will generate a warning. Click Start > Run and type regedit Go to the registry hive:
+# HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security and set the registry key settings as mentioned in the table below.
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param events_type event types map
 class compliance::windows::item::w_14 (
   Boolean $report_only                = true,
   Hash    $events_type                = { 'Application' =>  { 'MaxSize'       => '33554432',

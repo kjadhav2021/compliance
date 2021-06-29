@@ -1,9 +1,20 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_10
 #
-# A description of what this class does
+# **Title:** Disable all Non essential privileged accounts
 #
-# @example
-#   include compliance::windows::item::w_10
+# **Description:** Disable accounts not essential for system or application requirements.
+#
+#
+# **Impact:** Non-essential user accounts assists in gaining unauthorized access.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Disable all accounts that do not meet system or application objectives.
+#                       Click Start > Run and type compmgmt.msc
+#                       Expand Local User & Groups > Users container and disable the non-essential accounts in the system
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
 class compliance::windows::item::w_10 (
   Boolean $report_only = true,
 ){

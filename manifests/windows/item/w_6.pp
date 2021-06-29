@@ -1,9 +1,20 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_6
 #
-# A description of what this class does
+# **Title:** Secure the SNMP service settings [If SNMP is installed or enabled]
 #
-# @example
-#   include compliance::windows::item::w_6
+# **Description:** SNMP protocol helps in server monitoring and management. SNMP
+#                 community strings acts like a password to access the system. By default they are ‘Public’.
+#
+# **Impact:** The default strings assist in unauthorized access.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Use complex community strings.
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param community_string complex string for community name instead of public
+# @param community_type community type ie Read-only, Read-Write and snmp Trap
+
 class compliance::windows::item::w_6 (
   Boolean $report_only = true,
   String $community_string = 'TEJAq0jPaNXOUlDSyBdp',
@@ -35,7 +46,7 @@ $registry_path="HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SNMP\\P
     }
   }
   else {
-    notify{ compliance::policy_title($item_id, $item_title, 'SNMP not enabled or installed', ''):
+    notify { compliance::policy_title( $item_id, $item_title, 'SNMP not enabled or installed', ''):
       message => 'Missing-Deps',
     }
   }

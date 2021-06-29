@@ -1,9 +1,24 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_16
 #
-# A description of what this class does
+# **Title:** Secure the permissions to critical system files
 #
-# @example
-#   include compliance::windows::item::w_16
+# **Description:** Only authorized users should access critical files.
+#
+# **Impact:** Critical system files can be modified leading to non-availability of system and unauthorized access to critical data.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Restrict access on system files for specific users/groups with appropriate
+# permissions. Everyone group should not be configured with full control permission.
+# Go to My Computer > Tools > Folder Option > View
+# Enable Show hidden file and folder
+# Uncheck Hide protected operating system files
+# In c:\ now we can see the (boot.ini, ntdetect.com, ntldr) files
+# Right Click the files and go to Properties > Security and set the permissions
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param directories_acl directories acl map
 class compliance::windows::item::w_16 (
   Boolean $report_only      = true,
   Hash    $directories_acl  = {

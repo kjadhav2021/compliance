@@ -1,9 +1,21 @@
-# @summary
+# compliance::windows::item::w_19
 #
-# Disable the DNS cache
+# **Title:** Disable the DNS cache
 #
-# @example
-#   include compliance::windows::item::w_19
+# **Description:** The DNS Server service secures the cache from poisoning, which results
+# when DNS query responses contain no authoritative data.
+#
+# **Impact:** Users can successfully pollute the cache of a DNS server with resource records not requested by the DNS server.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Click Start > Run and type regedit
+#                       Go to the registry hive, create or set the registry key
+#             HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\DNScache\Parameters\SecureResponse = 1
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param policy_value registry value 0x00000001
 class compliance::windows::item::w_19 (
   Boolean $report_only = true,
   String $policy_value = '0x00000001',

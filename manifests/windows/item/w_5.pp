@@ -1,9 +1,24 @@
-# @summary A short summary of the purpose of this class
+# compliance::windows::item::w_5
 #
-# A description of what this class does
+# **Title:** Enable the screen saver password [Optional]
 #
-# @example
-#   include compliance::windows::item::w_5
+# **Description:** Windows server locks the console after a particular period of inactivity and
+#                  requires authentication for unlocking the console.
+#
+# **Impact:** An intruder can use an unattended console for manipulating system settings for gaining unauthorized access.
+#
+# **Risk Rating:** Medium
+#
+# **Standard Setting:** Set the screen server password and screen saver timeout to 15 minutes.
+#                       Right click on Desktop, select Properties and under the Screen Saver tab set the screen saver settings
+#                       Also set ‘On resume password protect’ checkbox
+#
+# **Note:** Screen saver password is required for servers located outside from Data Centre.
+#
+#
+# @param report_only Whether or not to set the resources to noop mode
+# @param screensaverissecuredata 1 or 0 to enable and disable screensaver
+# @param screensavertimeoutdata default timeout settings 15 mins
 class compliance::windows::item::w_5 (
   Boolean $report_only    = true,
   String $screensaverissecuredata = '1',
