@@ -45,7 +45,7 @@ class compliance::windows::item::w_2 (
       }
     else {
       class { 'timezone_win':
-      timezone => $system_timezone,
+        timezone => $system_timezone,
       }
     }
   }

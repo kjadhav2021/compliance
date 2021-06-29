@@ -5,7 +5,7 @@
 compliance::windows::item::w_1::skips_drive:
 - 'C:'
 # 2. Configure the time zone
-compliance::windows::item::w_2::system_timezone: Malay Peninsula Standard Time
+compliance::windows::item::w_2::system_timezone: Singapore Standard Time
 # w_4
 compliance::windows::item::w_4::inventory_map:
   7_zip:
