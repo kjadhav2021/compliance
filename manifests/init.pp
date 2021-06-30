@@ -14,7 +14,7 @@ class compliance {
       include compliance::windows
     }
     default: {
-      fail('N/A - Security compliance standard is not implemented for this OS')
+      warning('N/A - Security compliance standard is not implemented for this OS')
     }
   }
 }
