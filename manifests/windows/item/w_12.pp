@@ -16,8 +16,8 @@
 # @param report_only Whether or not to set the resources to noop mode
 # @param policy_items URA policy map
 class compliance::windows::item::w_12 (
-  Boolean $report_only      = true,
-  Hash    $policy_items     = { 'Access Credential Manager as a trusted caller' => {
+  Boolean $report_only   = true,
+  Hash    $policy_items  = { 'Access Credential Manager as a trusted caller' => {
                                   'policy_value' => ''
                                 },
                                 'Access this computer from the network' => {
@@ -173,7 +173,7 @@ class compliance::windows::item::w_12 (
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_12'
@@ -198,7 +198,7 @@ class compliance::windows::item::w_12 (
     local_security_policy { compliance::policy_title($item_id, $k, $setting_desc, "${value} "):
       ensure       => $ensure,
       name         => $k,
-      policy_value => $lsp_value
+      policy_value => $lsp_value,
     }
   }
 }

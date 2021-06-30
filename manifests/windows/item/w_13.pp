@@ -15,8 +15,8 @@
 # @param report_only Whether or not to set the resources to noop mode
 # @param policy_items local policies map
 class compliance::windows::item::w_13 (
-  Boolean $report_only    = true,
-  Hash    $policy_items     = { 'Accounts: Administrator account status' => {
+  Boolean $report_only   = true,
+  Hash    $policy_items  = { 'Accounts: Administrator account status' => {
                                   'policy_value' => '1'
                                 },
                                 'Accounts: Limit local account use of blank passwords to console logon only' => {
@@ -249,11 +249,11 @@ class compliance::windows::item::w_13 (
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
-  $item_id      = 'w_13'
-  $item_title   = 'Configure security options'
+  $item_id     = 'w_13'
+  $item_title  = 'Configure security options'
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
@@ -286,7 +286,7 @@ class compliance::windows::item::w_13 (
         local_security_policy { compliance::policy_title($item_id, $k, $setting_desc, "${value} "):
           ensure       => $ensure,
           name         => $k,
-          policy_value => $lsp_value
+          policy_value => $lsp_value,
         }
       }
     }

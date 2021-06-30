@@ -22,8 +22,8 @@
 #
 ##
 class compliance::windows::item::w_11 (
-  Boolean $report_only    = true,
-  Hash    $audit_items    = { 'Audit Other Account Logon / Logoff Events' => {
+  Boolean $report_only = true,
+  Hash    $audit_items = { 'Audit Other Account Logon / Logoff Events' => {
                                 'subcategory'   => 'Other Logon/Logoff Events',
                                 'policy_value'  => 'Success,Failure' },
                               'Audit User Account Management' => {
@@ -73,12 +73,6 @@ class compliance::windows::item::w_11 (
                               'Audit Authentication Policy Change' => {
                                 'subcategory'   => 'Authentication Policy Change',
                                 'policy_value'  => 'Success' },
-                              # 'Audit IPsec Driver' => {
-                              #   'subcategory'   => '',
-                              #   'policy_value'  => 'Success,Failure' },
-                              # 'Audit Other System Events' => {
-                              #   'subcategory'   => '',
-                              #   'policy_value'  => 'Success,Failure' },
                               'Audit Security State Change' => {
                                 'subcategory'   => 'Security State Change',
                                 'policy_value'  => 'Success,Failure' },
@@ -95,7 +89,7 @@ class compliance::windows::item::w_11 (
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_11'
