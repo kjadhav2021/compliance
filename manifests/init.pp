@@ -7,7 +7,8 @@
 class compliance {
   case $facts['osfamily'] {
     'RedHat': {
-      info('RHEL security baseline') # include bnm_compliance::rhel
+      info('RHEL security baseline')
+      include bnm_compliance::rhel
     }
     'windows': {
       info('Windows security baseline')
