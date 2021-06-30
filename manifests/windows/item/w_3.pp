@@ -19,14 +19,14 @@
 #
 # @param report_only Whether or not to set the resources to noop mode
 class compliance::windows::item::w_3(
-  Boolean $report_only    = true,
+  Boolean $report_only = true,
 ) {
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_3'
@@ -37,12 +37,8 @@ class compliance::windows::item::w_3(
   # ----------------------------------------------------------------------
   if $facts['pe_patch'] {
     if $facts['pe_patch']['package_update_count'] > 0 or $facts['pe_patch']['security_package_update_count'] > 0 {
-      notify { compliance::policy_title(
-                $item_id,
-                $item_title,
-                $setting_desc,
-                "Package Update Count: ${facts['pe_patch']['package_update_count']},
-                Security Package Update Count: ${facts['pe_patch']['security_package_update_count']}"):
+      notify { compliance::policy_title($item_id, $item_title, $setting_desc, "Package Update Count:
+      ${facts['pe_patch']['package_update_count']}, Security Package Update Count: ${facts['pe_patch']['security_package_update_count']}"):# lint:ignore:140chars
         message => 'Non-Compliant',
       }
     }
