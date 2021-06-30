@@ -5,10 +5,10 @@
 # @example
 #   include compliance::windows
 class compliance::windows (
-  Boolean $report_only                = true,
-  Array   $skipped_items              = []
+  Boolean $report_only   = true,
+  Array   $skipped_items = []
 ){
-  $standard = '::compliance::windows::item'
+  $standard = 'compliance::windows::item'
   $items = [
     'w_1',
     'w_2',
@@ -30,7 +30,7 @@ class compliance::windows (
     'w_18',
     'w_19',
     'w_20',
-    'w_21'
+    'w_21',
   ]
 
   case $facts['operatingsystemmajrelease'] {
@@ -38,7 +38,7 @@ class compliance::windows (
       $process_item = $items - $skipped_items
     }
     default: {
-      warning('N/A - Security compliance standard is implemented for this OS')
+      fail('N/A - Security compliance standard is implemented for this OS')
     }
   }
   # Include all items
@@ -49,7 +49,7 @@ class compliance::windows (
   } else {
     $process_item.each |$item| {
       class { "${standard}::${item}":
-        report_only => $report_only
+        report_only => $report_only,
       }
     }
   }
