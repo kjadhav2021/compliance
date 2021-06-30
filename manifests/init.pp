@@ -1,6 +1,6 @@
-# @summary A short summary of the purpose of this class
+# @summary BNM compliance
 #
-# A description of what this class does
+# compliance baseline based on 'Secure Configuration Documents' SCD
 #
 # @example
 #   include compliance

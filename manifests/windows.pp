@@ -1,6 +1,6 @@
-# @summary A short summary of the purpose of this class
+# @summary compliance list for windows operating system
 #
-# A description of what this class does
+# Windows compliance
 #
 # @example
 #   include compliance::windows
