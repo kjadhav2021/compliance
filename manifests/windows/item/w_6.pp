@@ -28,7 +28,7 @@ $registry_path="HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SNMP\\P
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_6'
@@ -40,9 +40,9 @@ $registry_path="HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SNMP\\P
 
   if $facts['windows_features'] and 'SNMP-Service' in $facts['windows_features'] {
     registry_value { "${registry_path}${community_string}" :
-    ensure => present,
-    type   => 'dword',
-    data   => $community_type,
+      ensure => present,
+      type   => 'dword',
+      data   => $community_type,
     }
   }
   else {

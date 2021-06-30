@@ -23,7 +23,7 @@ class compliance::windows::item::w_10 (
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_10'

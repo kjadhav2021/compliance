@@ -20,7 +20,7 @@
 # @param screensaverissecuredata 1 or 0 to enable and disable screensaver
 # @param screensavertimeoutdata default timeout settings 15 mins
 class compliance::windows::item::w_5 (
-  Boolean $report_only    = true,
+  Boolean $report_only = true,
   String $screensaverissecuredata = '1',
   String $screensavertimeoutdata = '900',
 ){
@@ -29,7 +29,7 @@ class compliance::windows::item::w_5 (
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_5'

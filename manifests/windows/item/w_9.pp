@@ -27,7 +27,7 @@ class compliance::windows::item::w_9 (
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_9'
@@ -36,11 +36,6 @@ class compliance::windows::item::w_9 (
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
-  # Password policy
-  # Local_security_policy {
-  #   ensure => present,
-  # }
-  # create_resources(local_security_policy,$security_policies)
   $security_policies.each | $k,$d | {
     local_security_policy { $d['title']:
       ensure       => present,
