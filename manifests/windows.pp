@@ -5,8 +5,8 @@
 # @example
 #   include compliance::windows
 class compliance::windows (
-  Boolean $report_only   = true,
-  Array   $skipped_items = []
+  Boolean $report_only = true,
+  Array $skipped_items = [],
 ){
   $standard = 'compliance::windows::item'
   $items = [

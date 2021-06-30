@@ -29,14 +29,14 @@
 class compliance::windows::item::w_20 (
   Boolean $report_only = true,
   String $policy_value1 = '0x00000001',
-  String $policy_value2 = '0x00000000'
+  String $policy_value2 = '0x00000000',
 ){
 # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_20'

@@ -20,7 +20,7 @@
 # @param skips_drive skip drives from enforcement.
 class compliance::windows::item::w_1 (
   Boolean $report_only = true,
-  Array[String] $skips_drive = ['C:']
+  Array[String] $skips_drive = ['C:'],
 ) {
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }

@@ -23,35 +23,23 @@
 # @param report_only Whether or not to set the resources to noop mode
 # @param firewall_rules firewall rules map
 class compliance::windows::item::w_21 (
-  Boolean $report_only    = true,
-  Hash $firewall_rules ={ 'domain_profile'  => [ {'firewall_state' => 'on'},
-                                                      {'inbound_conn' => 'blockinbound'},
-                                                      {'outbound_conn' => 'allowoutbound'},
-                                                      {'disp_notification' => 'enable'},
-                                                      {'allow_unicast' => 'disable'},
-                                                      {'local_firewall_rules' => 'n/a (gpo-store only)'},
-                                                      {'local_security_rules' => 'n/a (gpo-store only)'} ],
-                                        'private_profile'  => [ {'firewall_state' => 'on'},
-                                                      {'inbound_conn' => 'blockinbound'},
-                                                      {'outbound_conn' => 'allowoutbound'},
-                                                      {'disp_notification' => 'enable'},
-                                                      {'allow_unicast' => 'disable'},
-                                                      {'local_firewall_rules' => 'n/a (gpo-store only)'},
-                                                      {'local_security_rules' => 'n/a (gpo-store only)'} ],
-                                          'public_profile'  => [ {'firewall_state' => 'on'},
-                                                      {'inbound_conn' => 'blockinbound'},
-                                                      {'outbound_conn' => 'allowoutbound'},
-                                                      {'disp_notification' => 'enable'},
-                                                      {'allow_unicast' => 'disable'},
-                                                      {'local_firewall_rules' => 'n/a (gpo-store only)'},
-                                                      {'local_security_rules' => 'n/a (gpo-store only)'} ],},
+  Boolean $report_only = true,
+  Hash $firewall_rules = { 'domain_profile'  => [ {'firewall_state' => 'on'},
+{'inbound_conn' => 'blockinbound'},{'outbound_conn' => 'allowoutbound'},{'disp_notification' => 'enable'},
+{'allow_unicast' => 'disable'},{'local_firewall_rules' => 'n/a (gpo-store only)'},{'local_security_rules' => 'n/a (gpo-store only)'} ],
+'private_profile'  => [ {'firewall_state' => 'on'},{'inbound_conn' => 'blockinbound'},{'outbound_conn' => 'allowoutbound'},
+{'disp_notification' => 'enable'},{'allow_unicast' => 'disable'},{'local_firewall_rules' => 'n/a (gpo-store only)'},
+{'local_security_rules' => 'n/a (gpo-store only)'} ],
+'public_profile'  => [ {'firewall_state' => 'on'},{'inbound_conn' => 'blockinbound'},{'outbound_conn' => 'allowoutbound'},
+{'disp_notification' => 'enable'},{'allow_unicast' => 'disable'},{'local_firewall_rules' => 'n/a (gpo-store only)'},
+{'local_security_rules' => 'n/a (gpo-store only)'} ],},
 ) {
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_21'

@@ -33,8 +33,8 @@ class compliance::windows::item::w_10 (
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
     exec { compliance::policy_title($item_id,$item_title,$setting_desc) :
-    command  => 'Get-LocalUser Guest | Disable-LocalUser',
-    provider => powershell,
-    unless   => ['Get-LocalUser Guest | format-table -property enabled -hidetableheaders','true']
-  }
+      command  => 'Get-LocalUser Guest | Disable-LocalUser',
+      provider => powershell,
+      unless   => ['Get-LocalUser Guest | format-table -property enabled -hidetableheaders','true'],
+    }
 }

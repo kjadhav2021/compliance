@@ -20,18 +20,17 @@
 # @param skipped_shares skipped shares name String array
 # @param skipped_drives_shares skip drives flag true/false
 class compliance::windows::item::w_15 (
-  Boolean         $report_only            = true,
-  Hash            $permitted_shares       = { 'Downloads' => { 'Everyone' =>
-                                              { 'access_control_type' => 'Allow', 'access_right' => 'Read'} } },
-  Array[String]   $skipped_shares         = [ 'ADMIN$', 'IPC$', 'print$' ],
-  Boolean         $skipped_drives_shares  = true,
+  Boolean $report_only  = true,
+  Hash $permitted_shares = { 'Downloads' => { 'Everyone' => { 'access_control_type' => 'Allow', 'access_right' => 'Read'} } },
+  Array[String] $skipped_shares = [ 'ADMIN$', 'IPC$', 'print$' ],
+  Boolean $skipped_drives_shares = true,
 ) {
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_15'

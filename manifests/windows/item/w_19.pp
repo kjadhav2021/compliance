@@ -25,7 +25,7 @@ class compliance::windows::item::w_19 (
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_19'

@@ -19,7 +19,7 @@
 # @param system_timezone default system timezone.
 class compliance::windows::item::w_2 (
   Boolean $report_only = true,
-  String  $system_timezone = 'Singapore Standard Time'
+  String $system_timezone = 'Singapore Standard Time',
 ){
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }

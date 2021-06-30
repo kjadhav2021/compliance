@@ -21,7 +21,7 @@ class compliance::windows::item::w_6 (
   String $community_type = '0x00000004',
 ) {
 
-$registry_path="HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SNMP\\Parameters\\ValidCommunities\\"
+$registry_path = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\SNMP\\Parameters\\ValidCommunities\\"
 
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }

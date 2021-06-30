@@ -20,29 +20,19 @@
 # @param report_only Whether or not to set the resources to noop mode
 # @param events_type event types map
 class compliance::windows::item::w_14 (
-  Boolean $report_only                = true,
-  Hash    $events_type                = { 'Application' =>  { 'MaxSize'       => '33554432',
-                                                              'Retention'     => '0',
-                                                              'setting_desc'  => '32768 kilobytes'
-                                                            },
-                                          'Security'    =>  { 'MaxSize'       => '33554432',
-                                                              'Retention'     => '0',
-                                                              'WarningLevel'  => '90',
-                                                              'setting_desc'  => '32768 kilobytes, WarningLevel 90%'
-                                                            },
-                                          'System'      =>  { 'MaxSize'       => '33554432',
-                                                              'Retention'     => '0',
-                                                              'setting_desc'  => '32768 kilobytes'
-                                                            },
-                                        },
-  Boolean $gpo                        = false,
+  Boolean $report_only  = true,
+  Hash $events_type  = { 'Application' => { 'MaxSize' => '33554432','Retention' => '0','setting_desc' => '32768 kilobytes'},
+                            'Security' => { 'MaxSize' => '33554432','Retention' => '0','WarningLevel' => '90',
+                                            'setting_desc' => '32768 kilobytes, WarningLevel 90%'},
+                            'System' => { 'MaxSize' => '33554432','Retention' => '0','setting_desc' => '32768 kilobytes'},},
+  Boolean $gpo = false,
 ) {
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_14'

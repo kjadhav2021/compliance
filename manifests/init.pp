@@ -7,16 +7,14 @@
 class compliance {
   case $facts['osfamily'] {
     'RedHat': {
-      info('RHEL security basline')
-      # include bnm_compliance::rhel
+      info('RHEL security baseline') # include bnm_compliance::rhel
     }
     'windows': {
-      info('Windows security basline')
+      info('Windows security baseline')
       include compliance::windows
-      # include compliance::windows::item::w_1
     }
     default: {
-      warning('N/A - Security compliance standard is implemented for this OS')
+      fail('N/A - Security compliance standard is not implemented for this OS')
     }
   }
 }
