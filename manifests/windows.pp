@@ -38,7 +38,7 @@ class compliance::windows (
       $process_item = $items - $skipped_items
     }
     default: {
-      warning('N/A - Security compliance standard is not implemented for this OS')
+      fail('N/A - Security compliance standard is not implemented for this OS')
     }
   }
   # Include all items
