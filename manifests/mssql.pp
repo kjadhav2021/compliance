@@ -10,11 +10,11 @@ class compliance::mssql (
 ){
   $standard = '::compliance::mssql::item'
   $items = [
-    'mssql_1',
-    'mssql_2',
-    'mssql_3',
-    'mssql_4',
-    'mssql_5'
+    'mssql_1'
+    # 'mssql_2',
+    # 'mssql_3',
+    # 'mssql_4',
+    # 'mssql_5'
   ]
 
   # case $facts['operatingsystemmajrelease'] {
