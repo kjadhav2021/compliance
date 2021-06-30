@@ -18,21 +18,20 @@
 # @param report_only Whether or not to set the resources to noop mode
 # @param system_timezone default system timezone.
 class compliance::windows::item::w_2 (
-  Boolean $report_only    = true,
-  String  $system_timezone = 'Singapore Standard Time',
+  Boolean $report_only = true,
+  String  $system_timezone = 'Singapore Standard Time'
 ){
   # The below line sets this class and any contained classes/resources to noop/reporting mode
   if $report_only { noop() }
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'w_2'
   $item_title   = 'Configure the time zone'
   $setting_desc = '(UTC+08:00) Kuala Lumpur, Singapore - Malay Peninsula Standard Time'
-  # include compliance::rule_title
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
@@ -42,13 +41,12 @@ class compliance::windows::item::w_2 (
         notify { compliance::policy_title($item_id, $item_title, $setting_desc, 'the timezone has not configured correctly.'):
         message => 'Non-Compliant',
       }
-      }
-    else {
-      class { 'timezone_win':
-        timezone => $system_timezone,
+      } else {
+          class { 'timezone_win':
+            timezone => $system_timezone,
+        }
       }
     }
-  }
   }
   else {
     notify { compliance::policy_title($item_id, $item_title, 'Invalid facts', ''):
@@ -56,8 +54,3 @@ class compliance::windows::item::w_2 (
     }
   }
 }
-
-# local_security_policy { 'Change the time zone':
-      #   ensure       => present,
-      #   policy_value => $system_timezone,
-      # }
