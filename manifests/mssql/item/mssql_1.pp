@@ -27,12 +27,12 @@ class compliance::mssql::item::mssql_1 (
 
   Notify {
     tag       => ['compliance_rule'],
-    loglevel  => 'debug'
+    loglevel  => 'debug',
   }
 
   $item_id      = 'mssql_1'
   $item_title   = 'Configure strong permissions on MSSQL registry keys'
-  $setting_desc = 'Everyone group must be restricted to read permission or Description permission for HKLM\Software\Microsoft\Microsoft SQL Server' # lint:ignore:140chars
+  $setting_desc = 'Everyone group must be removed from permissions for HKLM\Software\Microsoft\Microsoft SQL Server' # lint:ignore:140chars
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------

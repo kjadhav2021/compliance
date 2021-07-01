@@ -5,19 +5,13 @@
 # @example
 #   include compliance::mssql
 class compliance::mssql (
-  Boolean $report_only                = true,
-  Array   $skipped_items              = []
+  Boolean $report_only = true,
+  Array   $skipped_items = [],
 ){
   $standard = '::compliance::mssql::item'
-  $items = [
-    'mssql_1'
-    # 'mssql_2',
-    # 'mssql_3',
-    # 'mssql_4',
-    # 'mssql_5'
-  ]
+  $items = ['mssql_1']
 
-  # case $facts['operatingsystemmajrelease'] {
+  # case $facts['operatingsystemmajrelease'] { # write logic to compare the versions of SQL server 2012, 2016, and 2019
   #   '2012 R2', '2012', '2016', '2019' : {
       $process_item = $items - $skipped_items
   # }
