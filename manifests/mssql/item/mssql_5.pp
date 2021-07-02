@@ -51,11 +51,10 @@ class compliance::mssql::item::mssql_5 (
     instance    => 'SQLEXPRESS',
     require     => Sqlserver::Config['SQLEXPRESS'],
   }
-  sqlserver::login { 'guest':
-    login       => 'guest',
-    login_type  => 'SQL_LOGIN',
-    instance    => 'SQLEXPRESS',
-    permissions => {'REVOKE' => ['CONNECT SQL'] },
-    require     => Sqlserver::Config['SQLEXPRESS'],
-  }
+  # sqlserver::login { 'guest':
+  #   login       => 'guest',
+  #   instance    => 'SQLEXPRESS',
+  #   permissions => {'REVOKE' => ['CONNECT SQL'] },
+  #   require     => Sqlserver::Config['SQLEXPRESS'],
+  # }
 }
