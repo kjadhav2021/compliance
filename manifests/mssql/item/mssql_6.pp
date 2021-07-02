@@ -42,11 +42,14 @@ class compliance::mssql::item::mssql_6 (
   }
 
   if $report_only {
+    notify { compliance::policy_title($item_id, $item_title, $setting_desc):
+      message => 'Non-Compliant',
+    }
     sqlserver_tsql{ 'disable or rename sa account':
       instance => 'SQLEXPRESS',
       onlyif   => "IF (SELECT count(*) FROM sys.server_principals where name ='sa' or (name ='sa' and is_disabled='1')) >= 1  THROW 100001, 'sa user exists,rename it to saforapps', 1",# lint:ignore:140chars
       require  => Sqlserver::Config['SQLEXPRESS'],
-      notify   => Exec['Too Many Fatal Errors'],
+      notify   => Notify[compliance::policy_title($item_id, $item_title, $setting_desc)],
     }
   } else {
     # Resource to execute alter login sql statement
