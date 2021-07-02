@@ -44,7 +44,8 @@ class compliance::mssql::item::mssql_5 (
     admin_login_type => 'WINDOWS_LOGIN',
     instance_name    => 'SQLEXPRESS',
   }
-  sqlserver::user {'guest':
+  # Resource to set permission REVOKE CONNECT for guest
+  sqlserver::user { 'guest':
     database    => 'DB_GUEST',
     login       => 'guest',
     permissions =>  {'REVOKE' => ['CONNECT'] },
