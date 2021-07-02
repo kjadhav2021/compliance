@@ -44,11 +44,12 @@ class compliance::mssql::item::mssql_5 (
     admin_login_type => 'WINDOWS_LOGIN'
   }
   ~> sqlserver::user {'guest':
+    database    => 'DB_GUEST',
     login       => 'guest',
-    permissions => 'REVOKE',
+    permissions => ['REVOKE'],
   }
-  ~> sqlserver::login::permissions { 'guest':
-    login => 'guest',
-    state => 'REVOKE',
-  }
+  # ~> sqlserver::login::permissions { 'guest':
+  #   login => 'guest',
+  #   state => Pattern[/(?i)^(REVOKE)$/],
+  # }
 }
