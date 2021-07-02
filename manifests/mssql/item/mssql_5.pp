@@ -43,32 +43,17 @@ class compliance::mssql::item::mssql_5 (
   sqlserver::config { 'SQLEXPRESS':
     admin_login_type => 'WINDOWS_LOGIN'
   }
-  ~> sqlserver::user {'guest':
+  sqlserver::user {'guest':
     database    => 'DB_GUEST',
     login       => 'guest',
     permissions =>  {'REVOKE' => ['CONNECT'] },
+    require     => Sqlserver::Config['SQLEXPRESS'],
   }
-  ~> sqlserver::login { 'guest':
+  sqlserver::login { 'guest':
     login       => 'guest',
-    # instance    => 'SQLEXPRESS',
     login_type  => 'SQL_LOGIN',
     disabled    => true,
-    permissions => {'REVOKE' => ['CONNECT SQL'] }
+    permissions => {'REVOKE' => ['CONNECT SQL'] },
+    require     => Sqlserver::Config['SQLEXPRESS'],
   }
-
-#   sqlserver::login { 'guest':
-#   login       => 'guest',
-#   # instance    => 'SQLEXPRESS',
-#   login_type  => 'SQL_LOGIN',
-#   disabled    => true,
-#   permissions => {'REVOKE' => ['CONNECT SQL'] },
-#   require     => Sqlserver::Config[MSSQLSERVER],
-# }
-
-# sqlserver::user {'guest':
-#   database    => 'DB_GUEST',
-#   login       => 'guest',
-#   permissions => {'REVOKE' => ['CONNECT'] },
-#   require     => Sqlserver::Config[MSSQLSERVER]
-# }
 }
