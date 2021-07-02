@@ -46,10 +46,13 @@ class compliance::mssql::item::mssql_5 (
   ~> sqlserver::user {'guest':
     database    => 'DB_GUEST',
     login       => 'guest',
-    permissions => ['REVOKE'],
+    permissions =>  {'REVOKE' => ['CONNECT'] },
   }
-  # ~> sqlserver::login::permissions { 'guest':
-  #   login => 'guest',
-  #   state => Pattern[/(?i)^(REVOKE)$/],
-  # }
+  ~> sqlserver::login { 'guest':
+    login       => 'guest',
+    # instance    => 'SQLEXPRESS',
+    login_type  => 'SQL_LOGIN',
+    disabled    => 'true',
+    permissions => {'GRANT' => ['CONNECT SQL', 'CREATE ANY DATABASE'] }
+  }
 }
