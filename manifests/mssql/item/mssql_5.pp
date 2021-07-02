@@ -41,18 +41,20 @@ class compliance::mssql::item::mssql_5 (
   # ----------------------------------------------------------------------
   # Resource to connect to the DB instance
   sqlserver::config { 'SQLEXPRESS':
-    admin_login_type => 'WINDOWS_LOGIN'
+    admin_login_type => 'WINDOWS_LOGIN',
+    instance_name    => 'SQLEXPRESS',
   }
   sqlserver::user {'guest':
     database    => 'DB_GUEST',
     login       => 'guest',
     permissions =>  {'REVOKE' => ['CONNECT'] },
+    instance    => 'SQLEXPRESS',
     require     => Sqlserver::Config['SQLEXPRESS'],
   }
   sqlserver::login { 'guest':
     login       => 'guest',
     login_type  => 'SQL_LOGIN',
-    disabled    => true,
+    instance    => 'SQLEXPRESS',
     permissions => {'REVOKE' => ['CONNECT SQL'] },
     require     => Sqlserver::Config['SQLEXPRESS'],
   }
