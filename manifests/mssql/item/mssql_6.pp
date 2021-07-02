@@ -36,10 +36,10 @@ class compliance::mssql::item::mssql_6 (
   # ----------------------------------------------------------------------
 
   # Resource to connect to the DB instance
-  # sqlserver::config { 'SQLEXPRESS':
-  #   admin_login_type => 'WINDOWS_LOGIN',
-  #   instance_name    => 'SQLEXPRESS',
-  # }
+  sqlserver::config { 'SQLEXPRESS':
+    admin_login_type => 'WINDOWS_LOGIN',
+    instance_name    => 'SQLEXPRESS',
+  }
   # sqlserver::login { 'sa':
   #   login    => 'sa',
   #   instance => 'SQLEXPRESS',
@@ -50,5 +50,6 @@ class compliance::mssql::item::mssql_6 (
     instance => 'SQLEXPRESS',
     command  => 'ALTER LOGIN sa DISABLE; ALTER LOGIN sa WITH NAME = saforapps;',
     onlyif   => "IF (SELECT count(*) FROM sys.server_principals where name ='sa' or (name ='sa' and is_disabled='1')) >= 1  THROW 100000, 'sa user exists,rename it to saforapps', 1",# lint:ignore:140chars
+    require  => Sqlserver::Config['SQLEXPRESS'],
   }
 }
