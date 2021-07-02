@@ -36,10 +36,10 @@ class compliance::mssql::item::mssql_6 (
   # ----------------------------------------------------------------------
 
   # Resource to connect to the DB instance
-  # sqlserver::config { 'SQLEXPRESS_mssql_6':
-  #   admin_login_type => 'WINDOWS_LOGIN',
-  #   instance_name    => 'SQLEXPRESS',
-  # }
+  sqlserver::config { 'SQLEXPRESS':
+    admin_login_type => 'WINDOWS_LOGIN',
+    instance_name    => 'SQLEXPRESS',
+  }
 
   if $report_only {
     notify { compliance::policy_title($item_id, $item_title, $setting_desc):

@@ -40,6 +40,10 @@ class compliance::mssql::item::mssql_5 (
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
   # Resource to connect to the DB instance
+  sqlserver::config { 'SQLEXPRESS':
+    admin_login_type => 'WINDOWS_LOGIN',
+    instance_name    => 'SQLEXPRESS',
+  }
   sqlserver::user {'guest':
     database    => 'DB_GUEST',
     login       => 'guest',
@@ -47,10 +51,4 @@ class compliance::mssql::item::mssql_5 (
     instance    => 'SQLEXPRESS',
     require     => Sqlserver::Config['SQLEXPRESS'],
   }
-  # sqlserver::login { 'guest':
-  #   login       => 'guest',
-  #   instance    => 'SQLEXPRESS',
-  #   permissions => {'REVOKE' => ['CONNECT SQL'] },
-  #   require     => Sqlserver::Config['SQLEXPRESS'],
-  # }
 }
