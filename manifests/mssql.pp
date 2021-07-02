@@ -11,6 +11,11 @@ class compliance::mssql (
   $standard = '::compliance::mssql::item'
   $items = ['mssql_1','mssql_5','mssql_6']
 
+  sqlserver::config { 'SQLEXPRESS':
+    admin_login_type => 'WINDOWS_LOGIN',
+    instance_name    => 'SQLEXPRESS',
+  }
+
   # case $facts['operatingsystemmajrelease'] { # write logic to compare the versions of SQL server 2012, 2016, and 2019
   #   '2012 R2', '2012', '2016', '2019' : {
       $process_item = $items - $skipped_items
