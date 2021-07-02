@@ -52,7 +52,23 @@ class compliance::mssql::item::mssql_5 (
     login       => 'guest',
     # instance    => 'SQLEXPRESS',
     login_type  => 'SQL_LOGIN',
-    disabled    => 'true',
-    permissions => {'GRANT' => ['CONNECT SQL', 'CREATE ANY DATABASE'] }
+    disabled    => true,
+    permissions => {'REVOKE' => ['CONNECT SQL'] }
   }
+
+#   sqlserver::login { 'guest':
+#   login       => 'guest',
+#   # instance    => 'SQLEXPRESS',
+#   login_type  => 'SQL_LOGIN',
+#   disabled    => true,
+#   permissions => {'REVOKE' => ['CONNECT SQL'] },
+#   require     => Sqlserver::Config[MSSQLSERVER],
+# }
+
+# sqlserver::user {'guest':
+#   database    => 'DB_GUEST',
+#   login       => 'guest',
+#   permissions => {'REVOKE' => ['CONNECT'] },
+#   require     => Sqlserver::Config[MSSQLSERVER]
+# }
 }
