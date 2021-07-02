@@ -45,6 +45,7 @@ class compliance::mssql::item::mssql_6 (
     notify { compliance::policy_title($item_id, $item_title, $setting_desc):
       message => 'Non-Compliant',
     }
+    # Resource to review compliance item mssql_6
     sqlserver_tsql{ 'disable or rename sa account':
       instance => 'SQLEXPRESS',
       onlyif   => "IF (SELECT count(*) FROM sys.server_principals where name ='sa' or (name ='sa' and is_disabled='1')) >= 1  THROW 100001, 'sa user exists,rename it to saforapps', 1",# lint:ignore:140chars
@@ -52,7 +53,7 @@ class compliance::mssql::item::mssql_6 (
       notify   => Notify[compliance::policy_title($item_id, $item_title, $setting_desc)],
     }
   } else {
-    # Resource to execute alter login sql statement
+    # Resource to enforce compliance item mssql_6 : alter login sa disable and rename it with saforapps
     sqlserver_tsql{ 'disable or rename sa account':
       instance => 'SQLEXPRESS',
       command  => 'ALTER LOGIN sa DISABLE; ALTER LOGIN sa WITH NAME = saforapps;',
