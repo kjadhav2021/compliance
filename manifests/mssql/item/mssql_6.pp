@@ -40,16 +40,21 @@ class compliance::mssql::item::mssql_6 (
     admin_login_type => 'WINDOWS_LOGIN',
     instance_name    => 'SQLEXPRESS',
   }
-  # sqlserver::login { 'sa':
-  #   login    => 'sa',
-  #   instance => 'SQLEXPRESS',
-  #   disabled => true,
-  #   require  => Sqlserver::Config['SQLEXPRESS'],
-  # }
-  sqlserver_tsql{ 'disable or rename sa account':
-    instance => 'SQLEXPRESS',
-    command  => 'ALTER LOGIN sa DISABLE; ALTER LOGIN sa WITH NAME = saforapps;',
-    onlyif   => "IF (SELECT count(*) FROM sys.server_principals where name ='sa' or (name ='sa' and is_disabled='1')) >= 1  THROW 100000, 'sa user exists,rename it to saforapps', 1",# lint:ignore:140chars
-    require  => Sqlserver::Config['SQLEXPRESS'],
+
+  if $report_only {
+    sqlserver_tsql{ 'disable or rename sa account':
+      instance => 'SQLEXPRESS',
+      onlyif   => "IF (SELECT count(*) FROM sys.server_principals where name ='sa' or (name ='sa' and is_disabled='1')) >= 1  THROW 100001, 'sa user exists,rename it to saforapps', 1",# lint:ignore:140chars
+      require  => Sqlserver::Config['SQLEXPRESS'],
+      notify   => compliance::policy_title($item_id, $item_title, "${setting_desc} - Non-Compliant"),
+    }
+  } else {
+    # Resource to execute alter login sql statement
+    sqlserver_tsql{ 'disable or rename sa account':
+      instance => 'SQLEXPRESS',
+      command  => 'ALTER LOGIN sa DISABLE; ALTER LOGIN sa WITH NAME = saforapps;',
+      onlyif   => "IF (SELECT count(*) FROM sys.server_principals where name ='sa' or (name ='sa' and is_disabled='1')) >= 1  THROW 100002, 'sa user exists,rename it to saforapps', 2",# lint:ignore:140chars
+      require  => Sqlserver::Config['SQLEXPRESS'],
+    }
   }
 }
