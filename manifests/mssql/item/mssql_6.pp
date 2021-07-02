@@ -46,7 +46,7 @@ class compliance::mssql::item::mssql_6 (
       instance => 'SQLEXPRESS',
       onlyif   => "IF (SELECT count(*) FROM sys.server_principals where name ='sa' or (name ='sa' and is_disabled='1')) >= 1  THROW 100001, 'sa user exists,rename it to saforapps', 1",# lint:ignore:140chars
       require  => Sqlserver::Config['SQLEXPRESS'],
-      notify   => Exec[compliance::policy_title($item_id, $item_title, "${setting_desc} - Non-Compliant")],
+      notify   => Compliance::Policy_title($item_id, $item_title, "${setting_desc} - Non-Compliant"),
     }
   } else {
     # Resource to execute alter login sql statement
