@@ -36,11 +36,10 @@ class compliance::mssql::item::mssql_1 (
 
   # Below this line comes all Puppet code required to enforce the standard
   # ----------------------------------------------------------------------
-
+  # Resource to enforce compliance item mssql_1
   exec { compliance::policy_title($item_id, $item_title, $setting_desc):
     command  => '$acl = Get-Acl \'HKLM:Software\Microsoft\Microsoft SQL Server\' ; $usersid = New-Object System.Security
                 .Principal.Ntaccount (\'Everyone\') ;$acl.PurgeAccessRules($usersid); $acl | set-acl',
     provider => powershell,
   }
-
 }
